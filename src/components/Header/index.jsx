@@ -1,6 +1,4 @@
-import { FC } from 'react';
-
-const Header: FC = (): JSX.Element => {
+const Header= () => {
   return (
     <div className='header'>
       

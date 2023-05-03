@@ -1,23 +1,22 @@
-import { FC } from 'react';
-import { useForm, SubmitHandler } from 'react-hook-form';
-import { redirect } from 'react-router-dom'
+import { useForm } from 'react-hook-form';
+import { useNavigate } from 'react-router-dom'
 import { api } from '../../utils/Api';
+import { emailCheck } from '../../utils/regExpressions';
   
-interface IFormInput {
-	name: string;
-	email: string;
-	password: string;
-}
-
-const SignUp: FC = () => {
+const SignUp = () => {
 	const {
 		register,
 		handleSubmit,
 		formState: { errors },
-	} = useForm<IFormInput>();
+	} = useForm();
 
-	const onSubmit: SubmitHandler<IFormInput> = (data: object) => {
-		api.signUp(data).then((res) => console.log(res));
+	const navigate = useNavigate();
+
+	const onSubmit = (data) => {
+		api.signUp(data).then(() => {
+			console.log('Thanks for the registration)!');
+			navigate('/sign-in');
+		});
 	};
 
 	return (
@@ -48,7 +47,7 @@ const SignUp: FC = () => {
 							{...register('email', {
 								required: 'Email is required',
 								pattern: {
-									value: /^[a-z0-9]{3,}@[a-z]{2,}\.[a-z]{2,}/,
+									value: emailCheck,
 									message: 'Email is incorrect',
 								}
 							})}
