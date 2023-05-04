@@ -5,7 +5,8 @@ class Api {
 
 	_getResponse(res) {
 		if (!res.ok) {
-			return Promise.reject(`Ошибка: ${res.status}`);
+			const msg = res.json().then(res)
+			return msg;
 		} else {
 			return res.json();
 		}
@@ -32,6 +33,16 @@ class Api {
 				'Content-Type': 'application/json',
 			},
 			body: JSON.stringify(data),
+		});
+	}
+
+	getUserData(data) {
+		return this._request(`${this.url}/users`, {
+			method: 'GET',
+			headers: {
+				'Content-Type': 'application/json',
+				'Authorization': `${data}`,
+			},
 		});
 	}
 }

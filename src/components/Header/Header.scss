@@ -1,0 +1,18 @@
+@use '../../scss/variables' as *;
+
+.header {
+  background-color: $medium;
+  width: 100vw;
+  height: 100px;
+  display: flex;
+  align-items: center;
+
+  .header__logo {
+    width: 150px;
+    object-fit: contain;
+  }
+
+  .header__sarch {
+    max-height: 25px;
+  }
+}

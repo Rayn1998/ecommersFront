@@ -1,22 +1,32 @@
 import { useForm } from 'react-hook-form';
-import { useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom';
 import { api } from '../../utils/Api';
 import { emailCheck } from '../../utils/regExpressions';
-// Types
+import { useSelector, useDispatch } from 'react-redux';
+import { setUser } from '../../redux/slices/userSlice';
 
-const SignIn= () => {
+const SignIn = () => {
+	// const user = useSelector(state => state.user.data);
+	const dispatch = useDispatch();
 	const {
 		register,
 		handleSubmit,
 		formState: { errors },
+		reset,
 	} = useForm();
-
 	const navigate = useNavigate();
 
 	const onSubmit = (data) => {
+		reset();
 		api.signIn(data).then((res) => {
-			console.log(res);
-			navigate('/');
+			if (!res.message) {
+				localStorage.setItem('token', res.token);
+				dispatch(setUser({...res}));
+				navigate('/');
+			} else {
+				// TODO: Сделать подсвечивание красным!!!!!!
+				console.log(res.message);
+			}
 		});
 	};
 
@@ -35,7 +45,7 @@ const SignIn= () => {
 								pattern: {
 									value: emailCheck,
 									message: 'Email is incorrect',
-								}
+								},
 							})}
 							placeholder='Email'
 						/>
@@ -48,7 +58,13 @@ const SignIn= () => {
 					<div>
 						<input
 							className='signup__form-input'
-							{...register('password', { required: 'Password is required', minLength: { value: 8, message: 'Password must be at least 8 symbols' } })}
+							{...register('password', {
+								required: 'Password is required',
+								minLength: {
+									value: 8,
+									message: 'Password must be at least 8 symbols',
+								},
+							})}
 							type='password'
 							placeholder='Password'
 						/>
