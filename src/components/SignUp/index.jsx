@@ -74,7 +74,7 @@ const SignUp = () => {
 				{/* INPUT SUBMIT */}
 				<div className='signup__form-submit-wrapper'>
 					<input className='signup__form-submit' type='submit' />
-					<p className='signin'>Sing In</p>
+					<p className='signin' onClick={() => navigate('/sign-in')}>Sing In</p>
 				</div>
 			</form>
 		</div>

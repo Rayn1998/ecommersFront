@@ -2,6 +2,9 @@
 @use 'components/SignUp/SignUp';
 @use 'components/Header/Header';
 @use 'components/SideMenu/SideMenu';
+@use 'components/Profile/Profile';
+@use 'components/Header/components/Input';
+@use 'components/GoodItem/GoodItem.scss';
 
 * {
   margin: 0;

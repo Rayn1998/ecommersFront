@@ -5,7 +5,7 @@ class Api {
 
 	_getResponse(res) {
 		if (!res.ok) {
-			const msg = res.json().then(res)
+			const msg = res.json().then(res);
 			return msg;
 		} else {
 			return res.json();
@@ -13,7 +13,9 @@ class Api {
 	}
 
 	async _request(url, options) {
-		return await fetch(url, options).then(this._getResponse);
+		return await fetch(url, options)
+			.then(this._getResponse)
+			.catch(() => Promise.reject(new Error(`Backend isn't replying`)));
 	}
 
 	signUp(data) {
@@ -41,7 +43,7 @@ class Api {
 			method: 'GET',
 			headers: {
 				'Content-Type': 'application/json',
-				'Authorization': `${data}`,
+				Authorization: `${data}`,
 			},
 		});
 	}

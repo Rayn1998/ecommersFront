@@ -62,7 +62,24 @@
         margin: 1.5rem auto 0;
         font-size: 1.4rem;
         cursor: pointer;
-        width: fit-content
+        width: fit-content;
+				position: relative;
+
+				&::before {
+					content: '';
+					position: absolute;
+					top: 100%;
+					left: 50%;
+					width: 0;
+					height: 0.1rem;
+					background-color: #000;
+					transform: translateX(-50%); 
+					transition: all 0.3s ease-in-out;
+				}
+
+				&:hover::before {
+					width: 100%;
+				}
       }
 		}
 

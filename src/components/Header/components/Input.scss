@@ -1,0 +1,56 @@
+@use '../../../scss/variables' as *;
+
+.input {
+  display: flex;
+  min-height: 3rem;
+  font-size: 2rem;
+
+  .dropdown {
+    min-width: 5rem;
+    border-top-left-radius: 0.5rem;
+    border-bottom-left-radius: 0.5rem;
+    background-color: $grey;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+
+    .dropdown-list {
+      position: absolute;
+      top: 0;
+      left: 0;
+      list-style: none;
+      background-color: $grey;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1rem;
+      // visibility: hidden;
+
+      .list-option {
+        visibility: visible;
+        // width: 0rem;
+        overflow-y: scroll;
+      }
+    }
+  }
+
+  .search-btn {
+    width: 5rem;
+    background-color: $yellow;
+    background-image: url('../../../assets/images/search_icon.png');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 50%;
+    border: none;
+    border-top-right-radius: 0.5rem;
+    border-bottom-right-radius: 0.5rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out;
+
+    &:hover {
+      background-color: $dark_yellow;
+    }
+  }
+}

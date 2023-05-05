@@ -2,11 +2,10 @@ import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 import { api } from '../../utils/Api';
 import { emailCheck } from '../../utils/regExpressions';
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { setUser } from '../../redux/slices/userSlice';
 
 const SignIn = () => {
-	// const user = useSelector(state => state.user.data);
 	const dispatch = useDispatch();
 	const {
 		register,
@@ -76,7 +75,7 @@ const SignIn = () => {
 				{/* INPUT SUBMIT */}
 				<div className='signup__form-submit-wrapper'>
 					<input className='signup__form-submit' type='submit' />
-					<p className='signin'>Sing Up</p>
+					<p className='signin' onClick={() => navigate('/sign-up')}>Sing Up</p>
 				</div>
 			</form>
 		</div>
