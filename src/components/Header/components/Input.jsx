@@ -1,4 +1,10 @@
-const Input = () => {
+import { useSelector, useDispatch } from "react-redux";
+import { setInput } from "../../../redux/slices/inputSlice";
+
+const Input = ({props}) => {
+	const input = useSelector(state => state.input.input);
+	const dispatch = useDispatch();
+	// const { input, setInput } = props;
 	return (
 		<div className='input'>
 			<select className='dropdown'>
@@ -19,7 +25,7 @@ const Input = () => {
 				</option>
 			</select>
 
-			<input />
+			<input value={input} onChange={e => dispatch(setInput(e.target.value))} />
 			<button className='search-btn' type='button' />
 		</div>
 	);

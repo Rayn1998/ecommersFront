@@ -1,37 +1,84 @@
 @use '../../scss/variables' as *;
 
-.good-item {
-  width: 30rem;
-  height: 40rem;
-  overflow: hidden;
-  display: flex;
-  flex-direction: column;
-  border-radius: 1rem;
-  margin: 1rem;
-  transition: box-shadow 0.3s ease-in-out;
-
+@mixin icon {
+	width: 2rem;
+	height: 2rem;
+	background-size: contain;
+	background-repeat: no-repeat;
+	position: absolute;
+	top: 1.5rem;
+	right: 1.5rem;
+	cursor: pointer;
   &:hover {
-    box-shadow: 0 0 20px #000;
+    filter: blur(0.1rem);
   }
+}
 
-  .good-item__image {
-    width: 100%;
-    height: 75%;
-    object-fit: cover;
-  }
+.good-item {
+	width: 30rem;
+	height: 40rem;
+	overflow: hidden;
+	display: flex;
+	flex-direction: column;
+	border-radius: 1rem;
+	margin: 1rem;
+	transition: box-shadow 0.3s ease-in-out;
 
-  .good-item__base {
-    width: 100%;
-    height: 20%;
-    background-color: #000;
-    display: flex;
-    flex-direction: column;
-    padding: 1rem;
-    overflow: hidden;
+	&:hover {
+		box-shadow: 0 0 20px $black;
+	}
 
-    .good-item__price {
-      color: $white;
-      width: fit-content
-    }
-  }
+	.good-item__image-wrapper {
+		height: 70%;
+		position: relative;
+
+		.good-item__image {
+			width: 100%;
+			height: 100%;
+			object-fit: cover;
+			border-radius: 1rem;
+		}
+
+		.image-fav {
+      @include icon;
+			background-image: url('../../assets/images/heart_icon.png');
+		}
+
+		.image-cart {
+      @include icon;
+      top: 5rem;
+			background-image: url('../../assets/images/cart_icon.png');
+		}
+	}
+
+	.good-item__base {
+		width: 100%;
+		height: 25%;
+		display: flex;
+		flex-direction: column;
+		justify-content: space-between;
+		padding: 1rem;
+		overflow: hidden;
+
+		.good-item__name {
+			font-size: 3rem;
+			font-weight: bold;
+		}
+
+		.good-item__brand {
+			font-size: 1.6rem;
+			color: $blue;
+		}
+
+		.good-item__rating {
+			display: flex;
+			gap: 1rem;
+		}
+
+		.good-item__price {
+			width: fit-content;
+			font-size: 2rem;
+			font-weight: bold;
+		}
+	}
 }

@@ -15,24 +15,25 @@ const Header = () => {
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
 	const [hover, setHover] = useState(false);
+	const [input, setInput] = useState('');
 
 	const handleLogOut = () => {
 		dispatch(setUserDefault());
 		localStorage.clear();
-	}
+	};
 	const handleProfile = () => {
 		navigate('/profile');
-	}
+	};
 
 	return (
 		<div className='header'>
-			<img 
-				className='header__logo' 
-				src={amazonLogo} 
-				alt='Amazon Logo' 
+			<img
+				className='header__logo'
+				src={amazonLogo}
+				alt='Amazon Logo'
 				onClick={() => navigate('/')}
 			/>
-			<Input />
+			<Input props={{ input, setInput }} />
 			<div className='header__icons'>
 				<img
 					className='header__fav-logo'
