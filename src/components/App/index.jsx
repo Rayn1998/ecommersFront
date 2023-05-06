@@ -6,6 +6,7 @@ import SignUp from '../SignUp';
 import SignIn from '../SignIn';
 import { useSelector } from 'react-redux';
 import Profile from '../Profile';
+import Admin from '../Admin';
 
 const App= () => {
   const user = useSelector(state => state.user.data);
@@ -21,7 +22,8 @@ const App= () => {
         />
         <Route path='/sign-up' element={<SignUp />} />
         <Route path='/sign-in' element={<SignIn />} />
-        <Route path='/profile' element={<Profile />} />
+        <Route path='/profile' element={<Profile/>} />
+        <Route path='/admin' element={<Admin/>} />
       </Routes>
     </div>
   );

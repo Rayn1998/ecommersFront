@@ -61,6 +61,17 @@ class Api {
 			},
 		});
 	}
+
+	updateUser(data, id) {
+		return this._request(`${this.url}/users/${id}`, {
+			method: 'PATCH',
+			headers: {
+				'Content-Type': 'application/json',
+				Authorization: `${this._getToken()}`,
+			},
+			body: JSON.stringify(data),
+		});
+	}
 }
 
 export const api = new Api('http://127.0.0.1:3001');

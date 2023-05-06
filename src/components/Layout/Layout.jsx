@@ -21,6 +21,7 @@ const Layout = () => {
 			});
 		}
 	}, [localStorage.getItem('token')]);
+
 	return (
 		<>
 			<Header />

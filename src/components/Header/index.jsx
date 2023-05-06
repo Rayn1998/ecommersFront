@@ -21,10 +21,14 @@ const Header = () => {
 		dispatch(setUserDefault());
 		localStorage.clear();
 	};
+
 	const handleProfile = () => {
 		navigate('/profile');
 	};
 
+	const handleAdmin = () => {
+		navigate('/admin');
+	}
 	return (
 		<div className='header'>
 			<img
@@ -64,6 +68,7 @@ const Header = () => {
 					>
 						<p>Welcome back, {user.name}</p>
 						<li onClick={handleProfile}>My profile</li>
+						{user.role === 'admin' && <li onClick={handleAdmin}>Admin Pannel</li>}
 						<li onClick={handleLogOut}>Logout</li>
 					</ul>
 				</div>
