@@ -1,6 +1,6 @@
 import { useSelector, useDispatch } from 'react-redux';
 import { setUser } from '../../redux/slices/userSlice';
-import { set, useForm } from 'react-hook-form';
+import { useForm } from 'react-hook-form';
 
 import { api } from '../../utils/Api';
 import Layout from '../Layout/Layout';
@@ -14,7 +14,6 @@ const Profile = () => {
 		register,
 		handleSubmit,
 		formState: { errors },
-		reset,
 	} = useForm({
 		values: {
 			name: user.name,

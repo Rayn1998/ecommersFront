@@ -3,14 +3,14 @@ import { useEffect, useCallback } from 'react';
 
 import { useDispatch, useSelector } from 'react-redux';
 import { setOpen } from '../../../../redux/slices/popups/createGoodPopup';
+import { addOneGood } from '../../../../redux/slices/goodsSlice';
 
 import { api } from '../../../../utils/Api';
 import FormInput from '../../../FormComponents/FormInput';
 
-const CreateGoodPopup = ({ props }) => {
+const CreateGoodPopup = () => {
 	const isOpen = useSelector((state) => state.createGoodPopup.isOpen);
 	const dispatch = useDispatch();
-	const { props: setGoods } = props;
 	const {
 		register,
 		handleSubmit,
@@ -20,7 +20,10 @@ const CreateGoodPopup = ({ props }) => {
 	const onSubmit = (data) => {
 		api
 			.createGood(data)
-			.then((res) => setGoods(res))
+			.then((res) => {
+				dispatch(addOneGood(res.data));
+				dispatch(setOpen());
+			})
 			.catch((err) => console.log(err));
 	};
 

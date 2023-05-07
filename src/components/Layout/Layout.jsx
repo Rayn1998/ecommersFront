@@ -1,9 +1,4 @@
-import { useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { api } from '../../utils/Api';
-
-import { useSelector, useDispatch } from 'react-redux';
-import { setUser } from '../../redux/slices/userSlice';
+import { useSelector } from 'react-redux';
 
 import Header from '../Header';
 import SideMenu from '../SideMenu';
@@ -15,19 +10,6 @@ const Layout = (props) => {
 	const isCreatePopupOpen = useSelector(
 		(state) => state.createGoodPopup.isOpen
 	);
-
-	const dispatch = useDispatch();
-	const navigate = useNavigate();
-
-	useEffect(() => {
-		if (!localStorage.getItem('token')) {
-			navigate('/sign-in');
-		} else {
-			api.getUserData().then((res) => {
-				dispatch(setUser({ ...res }));
-			});
-		}
-	}, [localStorage.getItem('token')]);
 
 	return (
 		<>

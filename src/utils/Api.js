@@ -63,6 +63,16 @@ class Api {
 		})
 	}
 
+	deleteGood(id) {
+		return this._request(`${this.url}/goods/${id}`, {
+			method: 'DELETE',
+			headers: {
+				'Content-Type': 'application/json',
+				Authorization: `${this._getToken()}`,
+			},
+		})
+	}
+
 	getGoods() {
 		return this._request(`${this.url}/goods`, {
 			method: 'GET',

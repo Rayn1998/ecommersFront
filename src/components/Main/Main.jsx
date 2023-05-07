@@ -2,29 +2,16 @@ import GoodItem from '../GoodItem';
 import Layout from '../Layout/Layout';
 
 import { useSelector } from 'react-redux';
-import { useState, useEffect } from 'react';
-
-import { api } from '../../utils/Api';
 
 const Main = () => {
 	const input = useSelector((state) => state.input.input);
-	const [goods, setGoods] = useState([]);
-
-	useEffect(() => {
-		api
-			.getGoods()
-			.then((res) => {
-				setGoods(res.data);
-			})
-			.catch((err) => console.log(err));
-	}, []);
+	const goods = useSelector((state) => state.goods.goods);
 
 	return (
 		<div className='main'>
-			<Layout props={setGoods} />
+			<Layout />
 			<div className='items'>
-				{goods
-					.filter((good) => {
+				{goods?.filter((good) => {
 						return input.toLowerCase() === ''
 							? good
 							: good.name.toLowerCase().includes(input.toLowerCase()) ||
