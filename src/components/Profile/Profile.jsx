@@ -1,3 +1,4 @@
+import { useCallback } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { setUser } from '../../redux/slices/userSlice';
 import { useForm } from 'react-hook-form';
@@ -22,11 +23,11 @@ const Profile = () => {
 		},
 	});
 
-	const onSubmit = (data) => {
+	const onSubmit = useCallback((data) => {
 		api.updateUser(data, user._id)
 			.then(res => dispatch(setUser(res.data)))
 			.catch(err => console.log(err));
-	};
+	}, []);
 
 	return (
 		<>

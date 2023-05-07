@@ -12,6 +12,7 @@ import SignUp from '../SignUp/SignUp';
 import SignIn from '../SignIn/SignIn';
 import Profile from '../Profile/Profile';
 import Admin from '../Admin/Admin';
+import Favourites from '../Favourites/Favourites';
 
 const App = () => {
 	const dispatch = useDispatch();
@@ -53,6 +54,7 @@ const App = () => {
 				<Route path='/sign-in' element={<SignIn />} />
 				<Route path='/profile' element={<Profile />} />
 				<Route path='/admin' element={<Admin />} />
+				<Route path='/favourites' element={<Favourites />} />
 			</Routes>
 		</div>
 	);

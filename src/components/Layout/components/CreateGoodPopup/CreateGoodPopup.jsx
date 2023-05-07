@@ -17,7 +17,7 @@ const CreateGoodPopup = () => {
 		formState: { errors },
 	} = useForm();
 
-	const onSubmit = (data) => {
+	const onSubmit = useCallback((data) => {
 		api
 			.createGood(data)
 			.then((res) => {
@@ -25,7 +25,7 @@ const CreateGoodPopup = () => {
 				dispatch(setOpen());
 			})
 			.catch((err) => console.log(err));
-	};
+	}, []);
 
 	const handleCloseClick = useCallback(() => {
 		dispatch(setOpen());

@@ -1,3 +1,4 @@
+import { useCallback } from 'react';
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 import { api } from '../../utils/Api';
@@ -15,7 +16,7 @@ const SignIn = () => {
 	} = useForm();
 	const navigate = useNavigate();
 
-	const onSubmit = (data) => {
+	const onSubmit = useCallback((data) => {
 		reset();
 		api.signIn(data).then((res) => {
 			if (!res.message) {
@@ -27,7 +28,7 @@ const SignIn = () => {
 				console.log(res.message);
 			}
 		});
-	};
+	}, []);
 
 	return (
 		<div className='signup'>

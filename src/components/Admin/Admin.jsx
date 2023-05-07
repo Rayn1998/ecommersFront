@@ -1,3 +1,4 @@
+import { useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { setOpen } from '../../redux/slices/popups/createGoodPopup';
 
@@ -10,9 +11,9 @@ const Admin = () => {
 	const users = useSelector(state => state.users.users);
 	const dispatch = useDispatch();
 
-	const handleCreateGood = () => {
+	const handleCreateGood = useCallback(() => {
 		dispatch(setOpen());
-	}
+	}, []);
 	return (
 		<>
 			<Layout />

@@ -1,4 +1,4 @@
-import GoodItem from '../GoodItem';
+import GoodItem from '../GoodItem/GoodItem';
 import Layout from '../Layout/Layout';
 
 import { useSelector } from 'react-redux';

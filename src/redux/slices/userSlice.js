@@ -17,12 +17,13 @@ const userSlice = createSlice({
 		},
 		setUserDefault(state, action) {
 			state.data = initialState.data;
+		},
+		addFavourite(state, { payload }) {
+			state.data.favourites = [ ...state.data.favourites, payload ];
 		}
 	},
 });
 
-// console.log(userSlice);
-
-export const { setUser, setUserDefault } = userSlice.actions;
+export const { setUser, setUserDefault, addFavourite } = userSlice.actions;
 
 export default userSlice.reducer;

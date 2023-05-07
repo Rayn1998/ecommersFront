@@ -5,7 +5,7 @@ import accIcon from '../../assets/images/profile_imagejpg.jpg';
 
 import { useSelector, useDispatch } from 'react-redux';
 import { setUserDefault } from '../../redux/slices/userSlice';
-import { useState } from 'react';
+import { useCallback, useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 
 import Input from './components/Input';
@@ -18,18 +18,22 @@ const Header = () => {
 	const [hover, setHover] = useState(false);
 	const [input, setInput] = useState('');
 
-	const handleLogOut = () => {
+	const handleLogOut = useCallback(() => {
 		dispatch(setUserDefault());
 		localStorage.clear();
-	};
+	}, []);
 
-	const handleProfile = () => {
+	const handleProfile = useCallback(() => {
 		navigate('/profile');
-	};
+	}, []);
 
-	const handleAdmin = () => {
+	const handleAdmin = useCallback(() => {
 		navigate('/admin');
-	}
+	}, []);
+
+	const handleFavourites = useCallback(() => {
+		navigate('/favourites');
+	}, []);
 	return (
 		<div className='header'>
 			<img
@@ -44,6 +48,7 @@ const Header = () => {
 					className='header__fav-logo'
 					src={favourites_icon}
 					alt='Favourites Icon'
+					onClick={handleFavourites}
 				/>
 				<img className='header__cart-icon' src={cart_icon} alt='Cart Icon' />
 				<div

@@ -1,7 +1,7 @@
 import { useSelector } from 'react-redux';
 
-import Header from '../Header';
-import SideMenu from '../SideMenu';
+import Header from '../Header/Header';
+import SideMenu from '../SideMenu/SideMenu';
 
 // POPUPS
 import CreateGoodPopup from './components/CreateGoodPopup/CreateGoodPopup';

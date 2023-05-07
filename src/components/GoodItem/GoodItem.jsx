@@ -1,12 +1,22 @@
-import goodImage from '../../assets/images/test_image.jpg';
+import { useCallback } from "react";
+import { useDispatch } from "react-redux";
+import { addFavourite } from "../../redux/slices/userSlice";
 
 const GoodItem = ({props}) => {
-  const { name, brand, categorie, image, rating, price } = props;
+  const { name, brand, categorie, image, rating, price, _id: id } = props;
+  const dispatch = useDispatch();
+
+  const handleFav = useCallback((e) => {
+    dispatch(addFavourite(props));
+  }, []);
   return (
     <div className="good-item">
       <div className='good-item__image-wrapper'>
         <img className='good-item__image' src={image} alt='Picture' />
-        <div className='image-fav'></div>
+        <div 
+          className='image-fav'
+          onClick={handleFav}
+        ></div>
         <div className='image-cart'></div>
         <div></div>
       </div>
