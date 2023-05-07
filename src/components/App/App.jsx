@@ -1,17 +1,12 @@
-import { useState, useEffect } from 'react';
-import { Route, Routes, useNavigate } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
 
-import Main from '../Main';
-import SignUp from '../SignUp';
-import SignIn from '../SignIn';
-import { useSelector } from 'react-redux';
-import Profile from '../Profile';
-import Admin from '../Admin';
+import Main from '../Main/Main';
+import SignUp from '../SignUp/SignUp';
+import SignIn from '../SignIn/SignIn';
+import Profile from '../Profile/Profile';
+import Admin from '../Admin/Admin';
 
 const App= () => {
-  const user = useSelector(state => state.user.data);
-
-  const [ loggedIn, setLoggedIn ] = useState(false);
   return (
     <div className="app">
       <Routes>

@@ -1,0 +1,45 @@
+@use '../../../../scss/variables' as *;
+
+.popup {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  background-color: $medium-half-opaque;
+  z-index: 2;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  .popup-container {
+    width: 50rem;
+    height: fit-content;
+    background-color: $white;
+    border-radius: 1rem;
+    display: flex;
+    flex-direction: column;
+    padding: 2rem 3.5rem;
+    box-sizing: border-box;
+    gap: 2rem;
+    position: relative;
+
+    .popup-close-btn {
+      position: absolute;
+      top: -3rem;
+      right: -3rem;
+      font-size: 3rem;
+      background-color: $white;
+      cursor: pointer;
+    }
+
+    .popup-title {
+      font-size: 2rem;
+      align-self: center;
+    }
+    
+    .popup-form {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+  }
+}

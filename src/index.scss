@@ -4,8 +4,14 @@
 @use 'components/Header/Header';
 @use 'components/SideMenu/SideMenu';
 @use 'components/Profile/Profile';
+@use 'components/Admin/Admin';
+@use 'components/Admin/components/Good/Good';
+@use 'components/Admin/components/User/User';
 @use 'components/Header/components/Input';
 @use 'components/GoodItem/GoodItem.scss';
+
+// POPUPS
+@use 'components/Layout/components/CreateGoodPopup/CreateGoodPopup';
 
 * {
   margin: 0;

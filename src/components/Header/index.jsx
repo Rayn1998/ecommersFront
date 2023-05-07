@@ -6,7 +6,7 @@ import accIcon from '../../assets/images/profile_imagejpg.jpg';
 import { useSelector, useDispatch } from 'react-redux';
 import { setUserDefault } from '../../redux/slices/userSlice';
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 
 import Input from './components/Input';
 
@@ -14,6 +14,7 @@ const Header = () => {
 	const user = useSelector((state) => state.user.data);
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
+	const location = useLocation();
 	const [hover, setHover] = useState(false);
 	const [input, setInput] = useState('');
 
@@ -37,7 +38,7 @@ const Header = () => {
 				alt='Amazon Logo'
 				onClick={() => navigate('/')}
 			/>
-			<Input props={{ input, setInput }} />
+			{location.pathname === '/' && <Input props={{ input, setInput }} />}
 			<div className='header__icons'>
 				<img
 					className='header__fav-logo'

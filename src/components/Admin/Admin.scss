@@ -1,0 +1,18 @@
+.admin {
+  padding: 0 2rem;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  justify-items: center;
+  margin-top: 2rem;
+  column-gap: 2rem;
+
+  div {
+    width: 100%;
+  }
+
+  .goods-list, .users-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+}

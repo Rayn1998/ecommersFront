@@ -1,0 +1,30 @@
+@use '../../../../scss/variables' as *;
+
+.user {
+  height: 5rem;
+  border-radius: 1rem;
+  border: 0.1rem solid $medium;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: $grey;
+  padding: 0 1rem;
+  box-sizing: border-box;
+  font-size: 2rem;
+
+  .user-name {
+    width: 5rem;
+  }
+
+  .options-wrapper {
+    // justify-self: center;
+    width: 15rem;
+    display: flex;
+    gap: 2rem;
+
+    p {
+      width: 5rem;
+      white-space: nowrap;
+    }
+  }
+}

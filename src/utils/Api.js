@@ -52,8 +52,29 @@ class Api {
 		});
 	}
 
+	createGood(data) {
+		return this._request(`${this.url}/goods`, {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json',
+				Authorization: `${this._getToken()}`,
+			},
+			body: JSON.stringify(data),
+		})
+	}
+
 	getGoods() {
 		return this._request(`${this.url}/goods`, {
+			method: 'GET',
+			headers: {
+				'Content-Type': 'application/json',
+				Authorization: `${this._getToken()}`,
+			},
+		});
+	}
+
+	getUsers() {
+		return this._request(`${this.url}/users/all`, {
 			method: 'GET',
 			headers: {
 				'Content-Type': 'application/json',

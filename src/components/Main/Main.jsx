@@ -21,7 +21,7 @@ const Main = () => {
 
 	return (
 		<div className='main'>
-			<Layout />
+			<Layout props={setGoods} />
 			<div className='items'>
 				{goods
 					.filter((good) => {

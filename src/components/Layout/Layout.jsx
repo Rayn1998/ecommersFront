@@ -2,13 +2,20 @@ import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { api } from '../../utils/Api';
 
-import { useDispatch } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { setUser } from '../../redux/slices/userSlice';
 
 import Header from '../Header';
 import SideMenu from '../SideMenu';
 
-const Layout = () => {
+// POPUPS
+import CreateGoodPopup from './components/CreateGoodPopup/CreateGoodPopup';
+
+const Layout = (props) => {
+	const isCreatePopupOpen = useSelector(
+		(state) => state.createGoodPopup.isOpen
+	);
+
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
 
@@ -24,6 +31,7 @@ const Layout = () => {
 
 	return (
 		<>
+			{isCreatePopupOpen && <CreateGoodPopup props={props} />}
 			<Header />
 			<SideMenu />
 		</>
