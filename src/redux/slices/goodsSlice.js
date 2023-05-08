@@ -9,7 +9,7 @@ const goodsSlice = createSlice({
 	initialState,
 	reducers: {
 		setGoods(state, { payload }) {
-			state.goods = [...state.goods, ...payload];
+			state.goods = [...payload];
 		},
     addOneGood(state, { payload }) {
       state.goods = [payload, ...state.goods];

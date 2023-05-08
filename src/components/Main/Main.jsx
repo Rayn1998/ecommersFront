@@ -1,3 +1,4 @@
+import ItemsContainer from '../ItemsContainer/ItemsContainer';
 import GoodItem from '../GoodItem/GoodItem';
 import Layout from '../Layout/Layout';
 
@@ -10,8 +11,9 @@ const Main = () => {
 	return (
 		<div className='main'>
 			<Layout />
-			<div className='items'>
-				{goods?.filter((good) => {
+			<ItemsContainer>
+				{goods
+					?.filter((good) => {
 						return input.toLowerCase() === ''
 							? good
 							: good.name.toLowerCase().includes(input.toLowerCase()) ||
@@ -20,7 +22,7 @@ const Main = () => {
 					.map((item) => {
 						return <GoodItem key={item._id} props={item} />;
 					})}
-			</div>
+			</ItemsContainer>
 		</div>
 	);
 };

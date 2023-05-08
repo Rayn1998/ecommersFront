@@ -103,6 +103,27 @@ class Api {
 			body: JSON.stringify(data),
 		});
 	}
+
+	addFavourite(id) {
+		return this._request(`${this.url}/users/${id}`, {
+			method: 'PUT',
+			headers: {
+				'Content-Type': 'application/json',
+				Authorization: `${this._getToken()}`,
+			},
+		});
+	}
+
+	removeFavourite(id) {
+		console.log('api remove')
+		return this._request(`${this.url}/users/${id}`, {
+			method: 'DELETE',
+			headers: {
+				'Content-Type': 'application/json',
+				Authorization: `${this._getToken()}`,
+			},
+		});
+	}
 }
 
 export const api = new Api('http://127.0.0.1:3001');

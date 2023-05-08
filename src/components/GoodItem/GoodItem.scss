@@ -9,8 +9,10 @@
 	top: 1.5rem;
 	right: 1.5rem;
 	cursor: pointer;
+	transition: transform 0.3s ease-in-out;
+
   &:hover {
-    filter: blur(0.1rem);
+		transform: scale(1.1);
   }
 }
 
@@ -41,7 +43,7 @@
 
 		.image-fav {
       @include icon;
-			background-image: url('../../assets/images/heart_icon.png');
+			// background-image: url('../../assets/images/heart_icon.png');
 		}
 
 		.image-cart {

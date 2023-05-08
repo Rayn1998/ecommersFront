@@ -15,15 +15,21 @@ const userSlice = createSlice({
 		setUser(state, { payload }) {
 			state.data = { ...state.data, ...payload };
 		},
-		setUserDefault(state, action) {
+		setUserDefault(state) {
 			state.data = initialState.data;
 		},
 		addFavourite(state, { payload }) {
 			state.data.favourites = [ ...state.data.favourites, payload ];
-		}
+		},
+		removeFavourite(state, { payload }) {
+			state.data.favourites = state.data.favourites.filter(
+				(fav) => fav._id !== payload._id
+			);
+		},
 	},
 });
 
-export const { setUser, setUserDefault, addFavourite } = userSlice.actions;
+export const { setUser, setUserDefault, addFavourite, removeFavourite } =
+	userSlice.actions;
 
 export default userSlice.reducer;

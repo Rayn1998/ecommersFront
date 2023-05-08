@@ -44,7 +44,7 @@ const App = () => {
 				})
 				.catch((err) => console.log(err));
 		}
-	}, []);
+	}, [localStorage.getItem('token')]);
 
 	return (
 		<div className='app'>

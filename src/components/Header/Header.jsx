@@ -1,6 +1,8 @@
 import amazonLogo from '../../assets/images/amazon_logo.png';
-import favourites_icon from '../../assets/images/favourites_icon.svg';
+import favourites_icon from '../../assets/images/heart_icon.png';
+import favourites_icon_active from '../../assets/images/heart_icon_active.png';
 import cart_icon from '../../assets/images/cart_icon.png';
+import cart_icon_active from '../../assets/images/cart_icon_active.png';
 import accIcon from '../../assets/images/profile_imagejpg.jpg';
 
 import { useSelector, useDispatch } from 'react-redux';
@@ -18,9 +20,14 @@ const Header = () => {
 	const [hover, setHover] = useState(false);
 	const [input, setInput] = useState('');
 
+	const checkFav = useCallback(() => {
+    return user.favourites.length > 0;
+  }, [user]);
+
 	const handleLogOut = useCallback(() => {
 		dispatch(setUserDefault());
 		localStorage.clear();
+		navigate('/sign-in');
 	}, []);
 
 	const handleProfile = useCallback(() => {
@@ -46,7 +53,7 @@ const Header = () => {
 			<div className='header__icons'>
 				<img
 					className='header__fav-logo'
-					src={favourites_icon}
+					src={checkFav() ? favourites_icon_active : favourites_icon}
 					alt='Favourites Icon'
 					onClick={handleFavourites}
 				/>
