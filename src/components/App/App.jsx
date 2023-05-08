@@ -14,6 +14,7 @@ import SignIn from '../SignIn/SignIn';
 import Profile from '../Profile/Profile';
 import Admin from '../Admin/Admin';
 import Favourites from '../Favourites/Favourites';
+import Payment from '../Payment/Payment';
 
 const App = () => {
 	const dispatch = useDispatch();
@@ -60,6 +61,7 @@ const App = () => {
 				<Route path='/profile' element={<Profile />} />
 				<Route path='/admin' element={<Admin />} />
 				<Route path='/favourites' element={<Favourites />} />
+				<Route path='/payment' element={<Payment />} />
 			</Routes>
 		</div>
 	);

@@ -1,6 +1,8 @@
 @use '../../scss/variables' as *;
 
 @mixin icon {
+	width: 3rem;
+	object-fit: contain;
 	transition: all 0.3s ease-in-out;
 
 	&:hover {
@@ -41,18 +43,12 @@
 		}
 
 		.cart-wrapper {
-			// width: fit-content;
 			position: relative;
 			height: fit-content;
 
 			.header__cart-icon {
 				@include icon;
 			}
-		}
-
-		img {
-			width: 3rem;
-			object-fit: contain;
 		}
 
 		.acc-wrapper {
@@ -80,7 +76,6 @@
 				font-size: 2rem;
 				visibility: hidden;
 				transition: all 0.4s ease-in-out;
-				// overflow: hidden;
 
 				li {
 					cursor: pointer;

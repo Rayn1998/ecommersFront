@@ -1,0 +1,20 @@
+.cart-item {
+  height: 5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 1.4rem;
+
+  .cart-item__image {
+    width: 5rem;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .count-wrapper {
+    display: flex;
+    flex-direction: column;
+    width: 6.5rem;
+    justify-content: center;
+  }
+}

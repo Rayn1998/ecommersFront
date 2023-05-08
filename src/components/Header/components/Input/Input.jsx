@@ -29,7 +29,7 @@ const Input = ({props}) => {
 				</option>
 			</select>
 
-			<input value={input} onChange={handleChange} />
+			<input className="input-type" value={input} onChange={handleChange} />
 			<button className='search-btn' type='button' />
 		</div>
 	);

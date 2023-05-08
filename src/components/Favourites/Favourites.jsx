@@ -11,7 +11,7 @@ const Favourites = () => {
 			<Layout />
 			<ItemsContainer>
 				{userFavourites.length === 0 ? (
-					<p>There is no favourites yet...</p>
+					<p className='no-favs'>There is no favourites yet...</p>
 				) : (
 					userFavourites.map((fav) => <GoodItem key={fav._id} props={fav} />)
 				)}

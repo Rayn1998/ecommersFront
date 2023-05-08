@@ -11,6 +11,8 @@
 @use 'components/Header/components/Input/Input';
 @use 'components/GoodItem/GoodItem.scss';
 @use 'components/Header/components/Cart/Cart';
+@use 'components/Favourites/Favourites';
+@use 'components/Header/components/CartItem/CartItem';
 
 // POPUPS
 @use 'components/Layout/components/CreateGoodPopup/CreateGoodPopup';
