@@ -1,6 +1,6 @@
 import { useCallback } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { setInput } from "../../../redux/slices/inputSlice";
+import { setInput } from "../../../../redux/slices/inputSlice";
 
 const Input = ({props}) => {
 	const input = useSelector(state => state.input.input);

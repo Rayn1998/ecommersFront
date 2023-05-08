@@ -1,4 +1,4 @@
-@use '../../../scss/variables' as *;
+@use '../../../../scss/variables' as *;
 
 .input {
   display: flex;
@@ -39,7 +39,7 @@
   .search-btn {
     width: 5rem;
     background-color: $yellow;
-    background-image: url('../../../assets/images/search_icon.png');
+    background-image: url('../../../../assets/images/search_icon.png');
     background-repeat: no-repeat;
     background-position: center;
     background-size: 50%;

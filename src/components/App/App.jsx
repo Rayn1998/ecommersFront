@@ -6,6 +6,7 @@ import { useDispatch } from 'react-redux';
 import { setGoods } from '../../redux/slices/goodsSlice';
 import { setUser } from '../../redux/slices/userSlice';
 import { setUsers } from '../../redux/slices/usersSlice';
+import { setCart } from '../../redux/slices/cartSlice';
 
 import Main from '../Main/Main';
 import SignUp from '../SignUp/SignUp';
@@ -19,6 +20,7 @@ const App = () => {
 	const navigate = useNavigate();
 
 	useEffect(() => {
+		let cart;
 		console.log('user and goods requests');
 		if (!localStorage.getItem('token')) {
 			navigate('/sign-in');
@@ -43,7 +45,10 @@ const App = () => {
 					dispatch(setUsers(res.data));
 				})
 				.catch((err) => console.log(err));
-		}
+
+			cart = JSON.parse(localStorage.getItem('cart'));
+			cart && dispatch(setCart(cart));
+			}
 	}, [localStorage.getItem('token')]);
 
 	return (

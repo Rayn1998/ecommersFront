@@ -1,18 +1,49 @@
 import { createSlice } from '@reduxjs/toolkit';
-
+import { useEffect } from 'react';
+ 
 const initialState = {
-	data: {}
+	data: [],
 };
 
 const cartSlice = createSlice({
-  name: 'cart', 
-  initialState,
-  reducers: {
-    addToCart(state, { payload }) {
-      state.data = { ...state.data, ...payload };
+	name: 'cart',
+	initialState,
+	reducers: {
+    setCart(state, { payload }) {
+      state.data = payload;
     },
-  },
+		addToCart(state, { payload }) {
+			let cart = JSON.parse(localStorage.getItem('cart'));
+			if (!cart) {
+				cart = [];
+			}
+			if (
+				state.data.some((item) => item._id === payload._id) 
+        || cart.some((item) => item._id === payload._id)
+			) {
+				console.log(`It's already in cart`);
+				return;
+			} else {
+        console.log('here');
+				cart.push(payload);
+				localStorage.setItem('cart', JSON.stringify(cart));
+				state.data = cart;
+			}
+		},
+		removeFromCart(state, { payload }) {
+			let cart = JSON.parse(localStorage.getItem('cart'));
+			if (!cart) {
+				cart = [];
+			}
+			console.log('remove payload', payload);
+			const newCart =cart.filter((item) => item._id !== payload._id);
+			console.log('cart after map', newCart);
+			
+			localStorage.setItem('cart', JSON.stringify(newCart));
+			state.data = newCart;
+		},
+	},
 });
 
-export const { addToCart } = cartSlice.actions;
+export const { addToCart, setCart, removeFromCart } = cartSlice.actions;
 export default cartSlice.reducer;

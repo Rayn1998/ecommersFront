@@ -1,0 +1,14 @@
+@use '../../../../scss/variables' as *;
+
+.cart {
+  width: 20rem;
+  height: 25rem;
+  position: absolute;
+  top: 4rem;
+  left: -10rem;
+  z-index: 2;
+  background-color: $grey;
+  border-radius: 1rem;
+  box-sizing: border-box;
+  padding: 2rem;
+}

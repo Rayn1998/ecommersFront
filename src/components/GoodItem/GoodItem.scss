@@ -43,13 +43,11 @@
 
 		.image-fav {
       @include icon;
-			// background-image: url('../../assets/images/heart_icon.png');
 		}
 
 		.image-cart {
       @include icon;
       top: 5rem;
-			background-image: url('../../assets/images/cart_icon.png');
 		}
 	}
 

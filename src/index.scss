@@ -8,8 +8,9 @@
 @use 'components/Admin/Admin';
 @use 'components/Admin/components/Good/Good';
 @use 'components/Admin/components/User/User';
-@use 'components/Header/components/Input';
+@use 'components/Header/components/Input/Input';
 @use 'components/GoodItem/GoodItem.scss';
+@use 'components/Header/components/Cart/Cart';
 
 // POPUPS
 @use 'components/Layout/components/CreateGoodPopup/CreateGoodPopup';

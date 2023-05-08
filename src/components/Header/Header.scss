@@ -33,15 +33,22 @@
 
 	.header__icons {
 		display: flex;
+		align-items: center;
 		gap: 2rem;
 
 		.header__fav-logo {
-      @include icon;
+			@include icon;
 		}
 
-    .header__cart-icon {
-      @include icon;
-    }
+		.cart-wrapper {
+			// width: fit-content;
+			position: relative;
+			height: fit-content;
+
+			.header__cart-icon {
+				@include icon;
+			}
+		}
 
 		img {
 			width: 3rem;

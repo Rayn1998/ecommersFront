@@ -10,23 +10,30 @@ import { setUserDefault } from '../../redux/slices/userSlice';
 import { useCallback, useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 
-import Input from './components/Input';
+import Input from './components/Input/Input';
+import Cart from './components/Cart/Cart';
 
 const Header = () => {
 	const user = useSelector((state) => state.user.data);
+	const cart = useSelector((state) => state.cart.data);
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
 	const location = useLocation();
 	const [hover, setHover] = useState(false);
 	const [input, setInput] = useState('');
+	const [isCartOpen, setIsCartOpen] = useState(false);
 
 	const checkFav = useCallback(() => {
     return user.favourites.length > 0;
   }, [user]);
 
+	const checkCart = useCallback(() => {
+		return cart.length > 0;
+	}, [cart]);
+
 	const handleLogOut = useCallback(() => {
 		dispatch(setUserDefault());
-		localStorage.clear();
+		localStorage.removeItem('token');
 		navigate('/sign-in');
 	}, []);
 
@@ -40,6 +47,10 @@ const Header = () => {
 
 	const handleFavourites = useCallback(() => {
 		navigate('/favourites');
+	}, []);
+
+	const handleCartClick = useCallback(() => {
+		setIsCartOpen(state => !state);
 	}, []);
 	return (
 		<div className='header'>
@@ -57,7 +68,17 @@ const Header = () => {
 					alt='Favourites Icon'
 					onClick={handleFavourites}
 				/>
-				<img className='header__cart-icon' src={cart_icon} alt='Cart Icon' />
+				<div 
+					className='cart-wrapper'
+				>
+					<img 
+						className='header__cart-icon' 
+						src={checkCart() ? cart_icon_active : cart_icon} 
+						alt='Cart Icon' 
+						onClick={handleCartClick}
+					/>
+					<Cart isOpen={isCartOpen} />
+				</div>
 				<div
 					className='acc-wrapper'
 					onMouseEnter={() => setHover(true)}
