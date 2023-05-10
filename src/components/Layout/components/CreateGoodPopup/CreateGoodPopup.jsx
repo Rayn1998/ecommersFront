@@ -2,8 +2,8 @@ import { useForm } from 'react-hook-form';
 import { useEffect, useCallback } from 'react';
 
 import { useDispatch, useSelector } from 'react-redux';
-import { setOpen, setClose } from '../../../../redux/slices/popups/createGoodPopup';
-import { addOneGood } from '../../../../redux/slices/goodsSlice';
+import { setClose } from '../../../../redux/slices/popups/createGoodPopup';
+import { addOneGood, changeGood } from '../../../../redux/slices/goodsSlice';
 import { removeCache } from '../../../../redux/slices/cacheSlice';
 
 import { api } from '../../../../utils/Api';
@@ -20,26 +20,37 @@ const CreateGoodPopup = () => {
 		formState: { errors },
 	} = useForm({
 		defaultValues: cache,
+		cache,
 	});
-
-	const onSubmit = useCallback((data) => {
-		// TODO: сделать смену событий для 'change' и 'create'
-		api
-			.createGood(data)
-			.then((res) => {
-				dispatch(addOneGood(res.data));
-				dispatch(setOpen());
-			})
-			.catch((err) => console.log(err));
-	}, []);
 
 	const handleCloseClick = useCallback(() => {
 		dispatch(setClose());
 		dispatch(removeCache());
 	}, []);
 
+	const onSubmit = useCallback((data) => {
+		if (type === 'create') {
+			api
+				.createGood(data)
+				.then((res) => {
+					dispatch(addOneGood(res.data));
+					handleCloseClick();
+				})
+				.catch((err) => console.log(err));
+		} else if (type === 'change') {
+			const { rating, __v, ...other } = data;
+			api
+				.updateGood(other)
+				.then((res) => {
+					dispatch(changeGood(res));
+					handleCloseClick();
+				})
+				.catch((err) => console.log(err));
+		}
+	}, []);
+
 	const handleEscClose = useCallback((e) => {
-		e.key === 'Escape' && dispatch(setOpen());
+		e.key === 'Escape' && handleCloseClick();
 	}, []);
 
 	useEffect(() => {

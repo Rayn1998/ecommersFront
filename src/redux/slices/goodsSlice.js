@@ -17,8 +17,13 @@ const goodsSlice = createSlice({
 		filterGoods(state, { payload }) {
 			state.goods = state.goods.filter((good) => good._id !== payload.good._id);
 		},
+		changeGood(state, { payload }) {
+			state.goods = state.goods.map((good) => {
+				return good._id === payload._id ? payload : good;
+			});
+		},
 	},
 });
 
-export const { setGoods, addOneGood, filterGoods } = goodsSlice.actions;
+export const { setGoods, addOneGood, filterGoods, changeGood } = goodsSlice.actions;
 export default goodsSlice.reducer;

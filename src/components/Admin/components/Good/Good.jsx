@@ -19,7 +19,7 @@ const Good = ({ props }) => {
 	const handleChangeClick = useCallback(() => {
     dispatch(setCache(props));
 		dispatch(setOpen('change'));
-	}, []);
+	}, [props]);
 	return (
 		<div className='good'>
 			<img className='good-img' src={props.image} alt={props.name} />

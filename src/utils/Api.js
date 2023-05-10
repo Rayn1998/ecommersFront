@@ -63,6 +63,17 @@ class Api {
 		})
 	}
 
+	updateGood(data) {
+		return this._request(`${this.url}/goods`, {
+			method: 'PATCH',
+			headers: {
+				'Content-Type': 'application/json',
+				Authorization: `${this._getToken()}`,
+			},
+			body: JSON.stringify(data),
+		})
+	}
+
 	deleteGood(id) {
 		return this._request(`${this.url}/goods/${id}`, {
 			method: 'DELETE',

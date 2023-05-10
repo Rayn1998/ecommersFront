@@ -11,7 +11,7 @@ const cacheSlice = createSlice({
 		setCache(state, { payload }) {
 			state.data = payload;
 		},
-    removeCache(state, { payload }) {
+    removeCache(state) {
       state.data = {};
     }
 	},

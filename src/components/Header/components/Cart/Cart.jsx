@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
@@ -6,8 +5,6 @@ import CartItem from "../CartItem/CartItem";
 
 const Cart = ({isOpen}) => {
   const cart = useSelector(state => state.cart.data);
-  useEffect(() => console.log(cart), [cart]);
-
   const navigate = useNavigate();
 
   const handlePay = () => {
