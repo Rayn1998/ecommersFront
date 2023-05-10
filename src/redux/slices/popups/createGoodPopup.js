@@ -2,6 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
 	isOpen: false,
+	type: 'create',
 };
 
 const createGoodPopupSlice = createSlice({
@@ -9,10 +10,16 @@ const createGoodPopupSlice = createSlice({
 	initialState,
 	reducers: {
 		setOpen(state, { payload }) {
-			state.isOpen = !state.isOpen;
+			console.log(payload);
+			state.isOpen = true;
+			state.type = payload.type;
 		},
+		setClose(state) {
+			state.isOpen = false;
+			state.type = '';
+		}
 	},
 });
 
-export const { setOpen } = createGoodPopupSlice.actions;
+export const { setOpen, setClose } = createGoodPopupSlice.actions;
 export default createGoodPopupSlice.reducer;

@@ -12,7 +12,7 @@ const Admin = () => {
 	const dispatch = useDispatch();
 
 	const handleCreateGood = useCallback(() => {
-		dispatch(setOpen());
+		dispatch(setOpen('create'));
 	}, []);
 	return (
 		<>

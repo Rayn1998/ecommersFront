@@ -2,22 +2,28 @@ import { useForm } from 'react-hook-form';
 import { useEffect, useCallback } from 'react';
 
 import { useDispatch, useSelector } from 'react-redux';
-import { setOpen } from '../../../../redux/slices/popups/createGoodPopup';
+import { setOpen, setClose } from '../../../../redux/slices/popups/createGoodPopup';
 import { addOneGood } from '../../../../redux/slices/goodsSlice';
+import { removeCache } from '../../../../redux/slices/cacheSlice';
 
 import { api } from '../../../../utils/Api';
 import FormInput from '../../../FormComponents/FormInput';
 
 const CreateGoodPopup = () => {
 	const isOpen = useSelector((state) => state.createGoodPopup.isOpen);
+	const type = useSelector((state) => state.createGoodPopup.type);
+	const cache = useSelector((state) => state.cache.data);
 	const dispatch = useDispatch();
 	const {
 		register,
 		handleSubmit,
 		formState: { errors },
-	} = useForm();
+	} = useForm({
+		defaultValues: cache,
+	});
 
 	const onSubmit = useCallback((data) => {
+		// TODO: сделать смену событий для 'change' и 'create'
 		api
 			.createGood(data)
 			.then((res) => {
@@ -28,7 +34,8 @@ const CreateGoodPopup = () => {
 	}, []);
 
 	const handleCloseClick = useCallback(() => {
-		dispatch(setOpen());
+		dispatch(setClose());
+		dispatch(removeCache());
 	}, []);
 
 	const handleEscClose = useCallback((e) => {
@@ -127,7 +134,7 @@ const CreateGoodPopup = () => {
 							errors,
 						}}
 					/>
-					<input type='submit' value='Create' />
+					<input type='submit' value='Apply' />
 				</form>
 			</div>
 		</div>

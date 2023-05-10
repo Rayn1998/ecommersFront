@@ -5,6 +5,7 @@ import createGoodPopup from './slices/popups/createGoodPopup';
 import goodsSlice from './slices/goodsSlice';
 import usersSlice from './slices/usersSlice';
 import cartSlice from './slices/cartSlice';
+import cacheSlice from './slices/cacheSlice';
 
 export const store = configureStore({
     reducer: {
@@ -14,5 +15,6 @@ export const store = configureStore({
         goods: goodsSlice,
         users: usersSlice,
         cart: cartSlice,
+        cache: cacheSlice,
     },
 });
