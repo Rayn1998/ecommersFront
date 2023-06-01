@@ -1,5 +1,7 @@
 import { Route, Routes, useNavigate } from 'react-router-dom';
 
+import 'bootstrap/dist/css/bootstrap.min.css';
+
 import { useEffect } from 'react';
 import { api } from '../../utils/Api';
 import { useDispatch } from 'react-redux';
@@ -22,7 +24,6 @@ const App = () => {
 
 	useEffect(() => {
 		let cart;
-		console.log('user and goods requests');
 		if (!localStorage.getItem('token')) {
 			navigate('/sign-in');
 		} else {

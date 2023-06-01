@@ -1,0 +1,18 @@
+.form-input {
+  display: flex;
+  font-size: 2rem;
+  gap: 1rem;
+  justify-content: space-between;
+
+  .form-input__name {
+    min-width: 10rem;
+  }
+
+  .input-wrapper {
+    width: 100%;
+  }
+
+  .form-input__input {
+    width: 100%;
+  }
+}

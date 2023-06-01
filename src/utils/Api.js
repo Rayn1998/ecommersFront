@@ -126,7 +126,6 @@ class Api {
 	}
 
 	removeFavourite(id) {
-		console.log('api remove')
 		return this._request(`${this.url}/users/${id}`, {
 			method: 'DELETE',
 			headers: {

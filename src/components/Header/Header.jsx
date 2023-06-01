@@ -24,8 +24,8 @@ const Header = () => {
 	const [isCartOpen, setIsCartOpen] = useState(false);
 
 	const checkFav = useCallback(() => {
-    return user.favourites.length > 0;
-  }, [user]);
+		return user.favourites.length > 0;
+	}, [user]);
 
 	const checkCart = useCallback(() => {
 		return cart.length > 0;
@@ -50,7 +50,7 @@ const Header = () => {
 	}, []);
 
 	const handleCartClick = useCallback(() => {
-		setIsCartOpen(state => !state);
+		setIsCartOpen((state) => !state);
 	}, []);
 	return (
 		<div className='header'>
@@ -68,17 +68,36 @@ const Header = () => {
 					alt='Favourites Icon'
 					onClick={handleFavourites}
 				/>
-				<div 
-					className='cart-wrapper'
+				<div
+					className='header__fav-logo-counter'
+					style={{
+						visibility: checkFav() ? 'visible' : 'hidden',
+						opacity: checkFav() ? 1 : 0,
+						transition: 'all 0.3s ease-in-out',
+					}}
 				>
-					<img 
-						className='header__cart-icon' 
-						src={checkCart() ? cart_icon_active : cart_icon} 
-						alt='Cart Icon' 
+					{user.favourites.length}
+				</div>
+				<div className='cart-wrapper'>
+					<img
+						className='header__cart-icon'
+						src={checkCart() ? cart_icon_active : cart_icon}
+						alt='Cart Icon'
 						onClick={handleCartClick}
 					/>
+					<div
+						className='header__cart-logo-counter'
+						style={{
+							visibility: checkCart() ? 'visible' : 'hidden',
+							opacity: checkCart() ? 1 : 0,
+							transition: 'all 0.3s ease-in-out',
+						}}
+					>
+						{cart.length}
+					</div>
 					<Cart isOpen={isCartOpen} />
 				</div>
+
 				<div
 					className='acc-wrapper'
 					onMouseEnter={() => setHover(true)}
@@ -86,6 +105,7 @@ const Header = () => {
 				>
 					<img className='header__acc-icon' src={accIcon} alt='Account Icon' />
 					<ul
+						className='header__acc-menu'
 						style={
 							hover
 								? {
@@ -100,9 +120,13 @@ const Header = () => {
 								  }
 						}
 					>
-						<p>Welcome back, {user.name}</p>
+						<p>
+							Welcome back, <strong>{user.name}</strong>
+						</p>
 						<li onClick={handleProfile}>My profile</li>
-						{user.role === 'admin' && <li onClick={handleAdmin}>Admin Pannel</li>}
+						{user.role === 'admin' && (
+							<li onClick={handleAdmin}>Admin Pannel</li>
+						)}
 						<li onClick={handleLogOut}>Logout</li>
 					</ul>
 				</div>

@@ -23,7 +23,6 @@ const cartSlice = createSlice({
 				console.log(`It's already in cart`);
 				return;
 			} else {
-        console.log('here');
 				cart.push(payload);
 				localStorage.setItem('cart', JSON.stringify(cart));
 				state.data = cart;
@@ -34,9 +33,7 @@ const cartSlice = createSlice({
 			if (!cart) {
 				cart = [];
 			}
-			console.log('remove payload', payload);
 			const newCart =cart.filter((item) => item._id !== payload._id);
-			console.log('cart after map', newCart);
 			
 			localStorage.setItem('cart', JSON.stringify(newCart));
 			state.data = newCart;

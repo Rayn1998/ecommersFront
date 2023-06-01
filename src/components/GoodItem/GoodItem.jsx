@@ -1,7 +1,11 @@
-import { useCallback, useState, useMemo, useEffect } from 'react';
+import { useCallback, useState, useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { addFavourite, removeFavourite } from '../../redux/slices/userSlice';
-import { addToCart, setCart, removeFromCart } from '../../redux/slices/cartSlice';
+import {
+	addToCart,
+	setCart,
+	removeFromCart,
+} from '../../redux/slices/cartSlice';
 import { api } from '../../utils/Api';
 
 import imageFav from '../../assets/images/heart_icon.png';
@@ -13,14 +17,46 @@ const GoodItem = ({ props }) => {
 	const userFavs = useSelector((state) => state.user.data.favourites);
 	const cart = useSelector((state) => state.cart.data);
 	const dispatch = useDispatch();
-	const { name, brand, categorie, image, rating, price, _id: id } = props;
+	const { name, brand, image, rating, price, _id: id } = props;
 
-  const checkFav = useCallback(() => {
-    return userFavs.some(fav => fav._id === id);
-  }, [userFavs]);
+	const [inCart, setInCart] = useState(false);
+	const [onBuy, setOnBuy] = useState(false);
+	const [onMouse, setOnMouse] = useState(false);
+	const [rotateX, setRotateX] = useState(0);
+	const [rotateY, setRotateY] = useState(0);
+	const cardRef = useRef();
+
+	const rotateCard = (event) => {
+		const  node = cardRef.current;
+		const mult = 5;
+
+		const halfWidth = node.offsetWidth / 2;
+		const halfHeight = node.offsetHeight / 2;
+
+		const middleX = node.offsetLeft + halfWidth;
+		const middleY = node.offsetTop + halfHeight;
+		const x = event.clientX - middleX;
+		const y = event.clientY - middleY;
+
+		const offsetX = (x / halfWidth) * mult;
+		const offsetY = (y / halfHeight) * mult;
+
+		setRotateY(offsetX * -1);
+		setRotateX(offsetY);
+	};
+
+	useEffect(() => {
+		const node = cardRef.current;
+		node.addEventListener('mousemove', rotateCard);
+		return () => node.removeEventListener('mousemove', rotateCard);
+	}, []);
+
+	const checkFav = useCallback(() => {
+		return userFavs.some((fav) => fav._id === id);
+	}, [userFavs]);
 
 	const checkInCart = useCallback(() => {
-		return cart.some(item => item._id === id);
+		return cart.some((item) => item._id === id);
 	}, [cart]);
 
 	const handleFav = useCallback(() => {
@@ -30,60 +66,108 @@ const GoodItem = ({ props }) => {
 				.then(() => {
 					dispatch(removeFavourite(props));
 				})
-				.catch((err) => console.log(err));
 		} else {
 			api
 				.addFavourite(id)
 				.then(() => {
 					dispatch(addFavourite(props));
 				})
-				.catch((err) => console.log(err));
 		}
 	}, [userFavs]);
 
 	const handleCartClick = useCallback(() => {
 		if (checkInCart()) {
 			dispatch(removeFromCart(props));
+			setInCart(false);
+			setOnBuy(true);
 			return;
 		}
-		cart 
-			? dispatch(addToCart(props))
-			: dispatch(setCart(props))
-	}, [cart]);	
+		setOnBuy(false);
+		setInCart(true);
+		cart ? dispatch(addToCart(props)) : dispatch(setCart(props));
+	}, [cart, inCart]);
+
+
+	useEffect(() => {
+
+	}, [cart])
 
 	return (
-		<div className='good-item'>
+		<div
+			className='good-item'
+			ref={cardRef}
+			onMouseEnter={(e) => {
+				rotateCard(e);
+				setOnMouse(true);
+			}}
+			onMouseLeave={() => setOnMouse(false)}
+			style={{
+				transform: `rotateX(${rotateX}deg) rotateY(${rotateY}deg)`,
+			}}
+		>
+			<div
+				className='good-item__back-anim'
+				style={{
+					visibility: onMouse ? 'visible' : 'hidden',
+					transition: 'visibility 0.3s ease-in-out',
+				}}
+			></div>
 			<div className='good-item__image-wrapper'>
+				<div className='good-item__corner'></div>
+					<div
+						className='image-fav'
+						onClick={handleFav}
+						style={{
+							backgroundImage: checkFav()
+								? `url(${imageFavActive})`
+								: `url(${imageFav})`,
+						}}
+					></div>
+					<div
+						className='image-cart'
+						onClick={handleCartClick}
+						style={{
+							backgroundImage: checkInCart()
+								? `url(${cartIconActive})`
+								: `url(${cartIcon})`,
+						}}
+					></div>
 				<img className='good-item__image' src={image} alt='Picture' />
-				<div
-					className='image-fav'
-					onClick={handleFav}
-					style={{
-						backgroundImage: checkFav()
-							? `url(${imageFavActive})`
-							: `url(${imageFav})`,
-						// opacity: isFav ? 0.5 : 1,
-					}}
-				></div>
-				<div 
-					className='image-cart'
-					onClick={handleCartClick}
-					style={{
-						backgroundImage: checkInCart()
-							? `url(${cartIconActive})`
-							: `url(${cartIcon})`,
-					}}
-					
-				></div>
 			</div>
 			<div className='good-item__base'>
-				<p className='good-item__name'>{name}</p>
-				<p className='good-item__brand'>{brand}</p>
+				<div className='good-item__base-text-wrapper'>
+					<p className='good-item__name'>{name}</p>
+					<p className='good-item__brand'>{brand}</p>
+				</div>
 				<div className='good-item__rating'>
 					<div className='stars'>{rating}*</div>
 					<p>Reviews</p>
 				</div>
 				<p className='good-item__price'>{price}$</p>
+				<div
+					className='good-item__buy-wrapper'
+					style={{
+						backgroundColor: ((onBuy && inCart) || inCart) && '#03b17a' || onBuy && '#d901c366',
+					}}
+					onMouseOver={() => {
+						setOnBuy(true)
+					}}
+					onMouseLeave={() => setOnBuy(false)}
+					onClick={() => {
+						handleCartClick();
+					}}
+				></div>
+				<p
+					className='good-item__buy-text'
+					onMouseOver={() => {
+						setOnBuy(true);
+					}}
+					onClick={() => {
+						handleCartClick();
+					}}
+				>
+					BUY
+				</p>
 			</div>
 		</div>
 	);

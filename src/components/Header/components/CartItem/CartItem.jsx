@@ -14,7 +14,7 @@ const CartItem = ({ props }) => {
 	const decr = useCallback(() => {
 		amount > 1 
 		? setAmount(amount => amount - 1)
-		: alert(`It can't be less than 1 ))`);
+		: handleDel();
 	}, [amount]);
 
 	const handleDel = useCallback(() => {
