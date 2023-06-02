@@ -1,5 +1,21 @@
 .main {
   padding-bottom: 2rem;
   overflow: hidden;
-  max-height: 100vh;
+  min-height: 100vh;
+  max-height: fit-content;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  .pagination {
+    // shrink-
+    // position: fixed;
+    // bottom: 1rem;
+    // left: 50%;
+    // transform: translateX(-50%);
+    // background-color: transparent;
+    
+    .pagination-item {
+    }
+  }
 }

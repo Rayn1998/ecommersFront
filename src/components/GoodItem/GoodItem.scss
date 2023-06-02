@@ -36,18 +36,18 @@
 
 @keyframes spin {
 	from {
-		background-color: #007a8a86;
+		background-color: $marine;
 		transform: translateX(-500%) translateY(500%) scale(6);
 	}
 	to {
-		background-color: #5f008e7c;
+		background-color: $purple-dark;
 		transform: translateX(500%) translateY(-500%) scale(6);
 	}
 }
 
 @mixin icon {
-	width: 2rem;
-	height: 2rem;
+	width: 3rem;
+	height: 3rem;
 	background-size: contain;
 	background-repeat: no-repeat;
 	position: absolute;
@@ -84,7 +84,7 @@
 	perspective: 5000px;
 
 	&:hover {
-		box-shadow: 0 0 1rem #560081, 0 0 1rem #007787;
+		box-shadow: 0 0 1rem $purple, 0 0 1rem #007787;
 	}
 
 	&::before {
@@ -98,10 +98,10 @@
 		border-radius: 1rem;
 		background: linear-gradient(
 			250deg,
-			#aa00ff 0%,
-			#060c21 40%,
-			#060c21 70%,
-			#00bcd4 100%
+			$violet 0%,
+			$blue-black 40%,
+			$blue-black 70%,
+			$cyan 100%
 		);
 	}
 
@@ -124,7 +124,7 @@
 			left: 50%;
 			border-radius: 1rem;
 			animation: spin alternate infinite 2s ease-in-out;
-			background-color: #00bcd4;
+			background-color: $cyan;
 			filter: blur(20px);
 		}
 	}
@@ -139,6 +139,8 @@
 		border-radius: 1rem;
 		transform-style: preserve-3d;
 		transform: translateZ(30px);
+		overflow: hidden;
+		cursor: pointer;
 
 		&::before {
 			content: '';
@@ -150,10 +152,10 @@
 			left: 0;
 			background: linear-gradient(
 				250deg,
-				rgba(170, 0, 255, 1) 0%,
-				#008dd400 15%,
-				#008dd400 94%,
-				#00bcd4 100%
+				$violet 0%,
+				$blue-dark 15%,
+				$blue-dark 94%,
+				$cyan 100%
 			);
 		}
 
@@ -200,10 +202,10 @@
 		backdrop-filter: blur(60px);
 		background: linear-gradient(
 			98deg,
-			rgba(6, 13, 38, 0.5) 0%,
-			rgba(74, 78, 89, 0.4) 30%,
-			rgba(74, 78, 89, 0.4) 70%,
-			rgba(6, 13, 38, 0.3) 100%
+			#060d2680 0%,
+			#4a4e5966 30%,
+			#4a4e5966 70%,
+			#060d264d 100%
 		);
 		transform: translateZ(50px);
 		transform-style: preserve-3d;
@@ -221,7 +223,7 @@
 	
 			.good-item__brand {
 				font-size: 1.6rem;
-				color: #86ace5;
+				color: $brand-card;
 			}
 		}
 
@@ -236,7 +238,7 @@
 			width: fit-content;
 			font-size: 2rem;
 			font-weight: bold;
-			color: #03b17a;
+			color: $card-price;
 		}
 
 		.good-item__buy-wrapper {
@@ -267,8 +269,8 @@
 			right: 5.5rem;
 			font-size: 1.6rem;
 			font-weight: 600;
-			text-shadow: 0 0 1rem #86e5e5, 0 0 2rem #86e5e5, 0 0 3rem #86e5e5;
-			color: #86e5e5;
+			text-shadow: 0 0 1rem $card-text-shadow, 0 0 2rem $card-text-shadow, 0 0 3rem $card-text-shadow;
+			color: $card-text-shadow;
 			cursor: pointer;
 
 			&:before {
@@ -283,10 +285,6 @@
 				transition: box-shadow 0.5s ease-in-out;
 				border-radius: 50%;
 			}
-
-			// &:hover::before {
-			// 	box-shadow: 0 0 5rem 4rem #6901d980;
-			// }
 		}
 	}
 }

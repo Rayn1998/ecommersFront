@@ -6,7 +6,7 @@ import SideMenu from '../SideMenu/SideMenu';
 // POPUPS
 import CreateGoodPopup from './components/CreateGoodPopup/CreateGoodPopup';
 
-const Layout = (props) => {
+const Layout = ({ props, children }) => {
 	const isCreatePopupOpen = useSelector(
 		(state) => state.createGoodPopup.isOpen
 	);
@@ -16,6 +16,7 @@ const Layout = (props) => {
 			{isCreatePopupOpen && <CreateGoodPopup props={props} />}
 			<Header />
 			<SideMenu />
+			{children}
 		</>
 	);
 };

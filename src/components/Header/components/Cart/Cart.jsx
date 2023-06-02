@@ -15,8 +15,8 @@ const Cart = ({isOpen}) => {
     <div 
       className="cart"
       style={{
-        transition: 'all 0.3s ease-in-out',
-        opacity: isOpen ? 1 : 0,
+        opacity: isOpen && 1,
+        filter: isOpen && 'blur(0)',
         transform: isOpen ? 'translateY(0)' : 'translateY(-200%)',
       }}
     >
@@ -24,6 +24,7 @@ const Cart = ({isOpen}) => {
         {cart.map(item => <CartItem key={item._id} props={item} />)}
       </div>
       <button
+        className="cart__pay"
         onClick={handlePay}
       >Pay!</button>
     </div>

@@ -31,7 +31,7 @@ const Main = () => {
 
 	// PAGINATION LOGIC
 	const handleNext = () => {
-		currentPage < Math.round(goods.length / goodsPerPage) && setCurrentPage(currentPage => currentPage + 1);
+		currentPage < Math.ceil(goods.length / goodsPerPage) && setCurrentPage(currentPage => currentPage + 1);
 	}
 
 	const handlePrev = () => {
@@ -39,7 +39,7 @@ const Main = () => {
 	}
 
 	const handleLastPage = () => {
-		setCurrentPage(Math.round(goods.length / goodsPerPage));
+		setCurrentPage(Math.ceil(goods.length / goodsPerPage));
 	}
 
 	const handleFirstPage = () => {
@@ -48,14 +48,19 @@ const Main = () => {
 
 	// CHANGE AMOUNT OF CARDS PER PAGE
 	//////////////////////////////////////////////////////////////////////////////
+	const break1 = 640;
+	const break2 = 1024;
+	const break3 = 1350;
+	const break4 = 1680;
+
 	const checkWidth = useCallback(() => {
-		if (window.innerWidth <= 640) {
+		if (window.innerWidth <= break1) {
 			setGoodsPerPage(2);
-		} else if (window.innerWidth >= 640 && window.innerWidth <= 1024) {
+		} else if (window.innerWidth >= break1 && window.innerWidth <= break2) {
 			setGoodsPerPage(4);
-		}	else if (window.innerWidth >= 1024 && window.innerWidth <= 1280) {
+		}	else if (window.innerWidth >= break2 && window.innerWidth <= break3) {
 			setGoodsPerPage(6);
-		}	else if (window.innerWidth >= 1280 && window.innerWidth <= 1680) {
+		}	else if (window.innerWidth >= break3 && window.innerWidth <= break4) {
 			setGoodsPerPage(8);
 		} else {
 			setGoodsPerPage(10);
@@ -85,19 +90,20 @@ const Main = () => {
 
 	return (
 		<div className='main'>
-			<Layout />
+			<Layout>
 			<ItemsContainer props={{ currentPage, setCurrentPage }} >
 				{currentGoods?.map((item) => {
 						return <GoodItem key={item._id} props={item} />;
 					})}
 			</ItemsContainer>
-			<Pagination size='lg' className='pagination'>
-				<Pagination.Item onClick={handleFirstPage} >First</Pagination.Item>
-				<Pagination.Item onClick={handlePrev} >{'<'}</Pagination.Item>
-				<Pagination.Item>{currentPage}</Pagination.Item>
-				<Pagination.Item onClick={handleNext} >{'>'}</Pagination.Item>
-				<Pagination.Item onClick={handleLastPage} >Last</Pagination.Item>
-			</Pagination>
+			</Layout>
+			<ul size='lg' className='pagination'>
+				<li className='pagination-item' onClick={handleFirstPage} >First</li>
+				<li className='pagination-item' onClick={handlePrev} >{'<'}</li>
+				<li className='pagination-item'>{currentPage}</li>
+				<li className='pagination-item' onClick={handleNext} >{'>'}</li>
+				<li className='pagination-item' onClick={handleLastPage} >Last</li>
+			</ul>
 		</div>
 	);
 };

@@ -1,63 +1,125 @@
 @use '../../../../scss/variables' as *;
 
 .input {
-  display: flex;
-  min-height: 3rem;
-  font-size: 2rem;
-  width: 50%;
+	display: flex;
+	min-height: 3rem;
+	font-size: 2rem;
+	width: 50%;
 
-  @media screen and (max-width: 640px) {
-    display: none;
-  }
+	@media screen and (max-width: 640px) {
+		display: none;
+	}
 
-  .dropdown {
-    min-width: 5rem;
-    border-top-left-radius: 0.5rem;
-    border-bottom-left-radius: 0.5rem;
-    background-color: $grey;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: relative;
-
+	.dropdown {
+		min-width: 5rem;
+		border-top-left-radius: 0.5rem;
+		border-bottom-left-radius: 0.5rem;
+		background-color: $purple;
+		outline: none;
+		border: none;
+		position: relative;
+		color: $grey;
+    font-weight: 600;
+    text-align: center;
+    cursor: pointer;
+    box-shadow: none;
+    transition: all 0.3s ease-in-out;
+    
     .dropdown-list {
+      @include dropdown;
+      padding: 2rem;
       position: absolute;
-      top: 0;
-      left: 0;
+      top: 5rem;
+      left: -3rem;
       list-style: none;
-      background-color: $grey;
-      width: 100%;
+      visibility: hidden;
+      transform: translateY(-30rem);
+      
       display: flex;
       flex-direction: column;
-      align-items: center;
-      gap: 1rem;
+      gap: 0.5rem;
+      overflow: hidden;
+      transition: all 0.3s ease-in-out;
+      
+      .list-item {
+        padding: 0.1rem;
+        border-radius: 1rem;
+        position: relative;
 
-      .list-option {
-        visibility: visible;
-        overflow-y: scroll;
+        &:hover {
+          text-shadow: 0 0 1rem $cyan;
+        }
+
+        &:hover::before {
+          width: 120%;
+          opacity: 1;
+          transform: translateX(-8%);
+        }
+
+        &::before {
+          content: '';
+          width: 0;
+          transform: translateX(50%);
+          height: 2rem;
+          position: absolute;
+          top: 0;
+          left: -0.3rem;
+          z-index: -1;
+          border: 0.5rem solid $card-price;
+          border-top-color: transparent;
+          border-bottom-color: transparent;
+          
+          opacity: 0;
+          filter: blur(0.2rem) brightness(2);
+          transition: all 0.15s ease-in-out;
+        }
+
       }
     }
-  }
 
-  .input-type {
-    width: 50rem;
-  }
+	}
 
-  .search-btn {
-    width: 5rem;
-    background-color: $yellow;
-    background-image: url('../../../../assets/images/search_icon.png');
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: 50%;
-    border: none;
-    border-top-right-radius: 0.5rem;
-    border-bottom-right-radius: 0.5rem;
-    cursor: pointer;
-    transition: background-color 0.3s ease-in-out;
+	.input-type {
+		width: 50rem;
+		background-color: transparent;
+		border: none;
+		border-bottom: 0.2rem solid $marine;
+		outline: 0.1rem solid $purple;
+		backdrop-filter: blur(5px);
+		transition: all 0.3s ease-in-out;
+		color: $grey;
+    padding: 0 1rem;
 
-    &:hover {
-      background-color: $dark_yellow;
+		&:focus {
+			outline: 0.1rem solid $cyan;
+			box-shadow: inset 0 0 1rem $cyan, 0 0 1rem $cyan;
+		}
+	}
+
+  // BUTTON
+	.search-btn {
+		width: 5rem;
+		background-color: $purple-input;
+		background-image: url('../../../../assets/images/x.png');
+		background-repeat: no-repeat;
+		background-position: center;
+		background-size: 50%;
+		border: none;
+		border-top-right-radius: 0.5rem;
+		border-bottom-right-radius: 0.5rem;
+		cursor: pointer;
+    transform: translateY(-0.05rem);
+		transition: background-color, outline 0.3s ease-in-out;
+    transition: transform 0.1s ease-in-out;
+
+		&:hover {
+			background-color: $marine;
+			outline: 0.1rem solid $cyan;
+      filter: brightness(1.5);
+		}
+
+    &:active {
+      transform: translateY(0.1rem);
     }
-  }
+	}
 }

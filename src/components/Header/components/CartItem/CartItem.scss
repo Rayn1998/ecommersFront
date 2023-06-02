@@ -1,20 +1,64 @@
+@use '../../../../scss/variables' as *;
+
 .cart-item {
-  height: 5rem;
+  height: 8rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
   font-size: 1.4rem;
+  background-color: $violet-half-opaque;
+  border-radius: 1rem;
+  padding: 1rem;
+  color: $brand-card;
+  font-size: 1.6rem;
+  font-weight: 600;
 
   .cart-item__image {
     width: 5rem;
     height: 100%;
     object-fit: cover;
+    border-radius: 0.5rem;
   }
 
   .count-wrapper {
     display: flex;
-    flex-direction: column;
-    width: 6.5rem;
+    // flex-direction: column;
+    width: 14rem;
     justify-content: center;
+    align-items: center;
+    gap: 1rem;
+
+    .count-wrapper__amount {
+      width: 100%;
+    }
+
+    .count-wrapper__buttons {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+
+      .count-wrapper__button {
+        width: 3rem;
+        height: 2rem;
+        border: none;
+        background-color: $blue;
+        color: $grey;
+        border-radius: 0.4rem;
+        cursor: pointer;
+      }
+    }
+  }
+
+  .cart-item__delete {
+    width: 2rem;
+    height: 2rem;
+    background-color: $yellow;
+    border: none;
+    border-radius: 1rem;
+    cursor: pointer;
+    
+    &:hover {
+      box-shadow: 0 0 0.3rem 0.3rem $card-price;
+    }
   }
 }

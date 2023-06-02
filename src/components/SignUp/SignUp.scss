@@ -3,7 +3,7 @@
 .signup {
 	margin: 0 auto;
 	max-width: 1280px;
-	height: 100%;
+	height: 100vh;
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -46,7 +46,7 @@
 
 			.signup__form-submit {
         width: 100%;
-				background-color: $yellow;
+				// background-color: $yellow;
 				border: none;
 				border-radius: .75rem;
 				height: 3.5rem;

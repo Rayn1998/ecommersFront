@@ -1,8 +1,8 @@
 import amazonLogo from '../../assets/images/amazon_logo.png';
-import favourites_icon from '../../assets/images/heart_icon.png';
-import favourites_icon_active from '../../assets/images/heart_icon_active.png';
-import cart_icon from '../../assets/images/cart_icon.png';
-import cart_icon_active from '../../assets/images/cart_icon_active.png';
+import imageFav from '../../assets/images/fav.png';
+import imageFavActive from '../../assets/images/fav_active.png';
+import cartIcon from '../../assets/images/cartIcon.png';
+import cartIcon_active from '../../assets/images/cartIcon_active.png';
 import accIcon from '../../assets/images/profile_imagejpg.jpg';
 
 import { useSelector, useDispatch } from 'react-redux';
@@ -20,7 +20,6 @@ const Header = () => {
 	const navigate = useNavigate();
 	const location = useLocation();
 	const [hover, setHover] = useState(false);
-	const [input, setInput] = useState('');
 	const [isCartOpen, setIsCartOpen] = useState(false);
 
 	const checkFav = useCallback(() => {
@@ -60,11 +59,11 @@ const Header = () => {
 				alt='Amazon Logo'
 				onClick={() => navigate('/')}
 			/>
-			{location.pathname === '/' && <Input props={{ input, setInput }} />}
+			{location.pathname === '/' && <Input />}
 			<div className='header__icons'>
 				<img
 					className='header__fav-logo'
-					src={checkFav() ? favourites_icon_active : favourites_icon}
+					src={checkFav() ? imageFavActive : imageFav}
 					alt='Favourites Icon'
 					onClick={handleFavourites}
 				/>
@@ -81,7 +80,7 @@ const Header = () => {
 				<div className='cart-wrapper'>
 					<img
 						className='header__cart-icon'
-						src={checkCart() ? cart_icon_active : cart_icon}
+						src={checkCart() ? cartIcon_active : cartIcon}
 						alt='Cart Icon'
 						onClick={handleCartClick}
 					/>

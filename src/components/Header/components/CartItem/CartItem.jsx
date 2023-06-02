@@ -24,11 +24,14 @@ const CartItem = ({ props }) => {
 		<div className='cart-item'>
 			<img className='cart-item__image' src={props.image} alt={props.name} />
 			<div className='count-wrapper'>
-				<p>Amount: {amount}</p>
-				<button onClick={incr}>+</button>
-				<button onClick={decr}>-</button>
+				<p className='count-wrapper__amount'>Amount: {amount}</p>
+				<div className='count-wrapper__buttons'>
+					<button className='count-wrapper__button' onClick={incr}>+</button>
+					<button className='count-wrapper__button' onClick={decr}>-</button>
+				</div>
 			</div>
 			<button
+				className='cart-item__delete'
 				onClick={handleDel}
 			>X</button>
 		</div>

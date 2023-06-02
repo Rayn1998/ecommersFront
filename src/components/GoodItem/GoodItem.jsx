@@ -8,12 +8,13 @@ import {
 } from '../../redux/slices/cartSlice';
 import { api } from '../../utils/Api';
 
-import imageFav from '../../assets/images/heart_icon.png';
-import imageFavActive from '../../assets/images/heart_icon_active.png';
-import cartIcon from '../../assets/images/cart_icon.png';
-import cartIconActive from '../../assets/images/cart_icon_active.png';
+import imageFav from '../../assets/images/fav.png';
+import imageFavActive from '../../assets/images/fav_active.png';
+import cartIcon from '../../assets/images/cartIcon.png';
+import cartIconActive from '../../assets/images/cartIcon_active.png';
 
 const GoodItem = ({ props }) => {
+	 // TODO: не отключается кнопка BUY, если убрать карточку из корзины
 	const userFavs = useSelector((state) => state.user.data.favourites);
 	const cart = useSelector((state) => state.cart.data);
 	const dispatch = useDispatch();
@@ -27,8 +28,8 @@ const GoodItem = ({ props }) => {
 	const cardRef = useRef();
 
 	const rotateCard = (event) => {
-		const  node = cardRef.current;
-		const mult = 5;
+		const node = cardRef.current;
+		const mult = 6;
 
 		const halfWidth = node.offsetWidth / 2;
 		const halfHeight = node.offsetHeight / 2;
@@ -79,7 +80,6 @@ const GoodItem = ({ props }) => {
 		if (checkInCart()) {
 			dispatch(removeFromCart(props));
 			setInCart(false);
-			setOnBuy(true);
 			return;
 		}
 		setOnBuy(false);
@@ -89,8 +89,9 @@ const GoodItem = ({ props }) => {
 
 
 	useEffect(() => {
-
-	}, [cart])
+		const inCart = cart.some(item => item._id === id);
+		inCart && setInCart(true);
+	}, [])
 
 	return (
 		<div
@@ -132,7 +133,11 @@ const GoodItem = ({ props }) => {
 								: `url(${cartIcon})`,
 						}}
 					></div>
-				<img className='good-item__image' src={image} alt='Picture' />
+				<img 
+					className='good-item__image' 
+					src={image} 
+					alt='Picture'
+				/>
 			</div>
 			<div className='good-item__base'>
 				<div className='good-item__base-text-wrapper'>
@@ -162,6 +167,7 @@ const GoodItem = ({ props }) => {
 					onMouseOver={() => {
 						setOnBuy(true);
 					}}
+					onMouseLeave={() => setOnBuy(false)}
 					onClick={() => {
 						handleCartClick();
 					}}

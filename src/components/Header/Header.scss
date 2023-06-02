@@ -17,17 +17,14 @@
 
 .header {
 	background-color: rgba(170, 0, 255, 0.1);
-	// background: linear-gradient(
-	// 	0deg,
-	// 	rgba(170, 0, 255, 1) 12%,
-	// 	#00bcd4 90%,
-	// );
-	// filter: blur(20px);
 	height: 10rem;
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
 	padding: 0 2rem;
+	backdrop-filter: blur(0.5rem) brightness(1.5);
+	position: relative;
+	z-index: 2;
 
 	.header__logo {
 		width: 15rem;
@@ -55,7 +52,7 @@
 			position: absolute;
 			top: -1rem;
 			left: 3rem;
-			color: $dark_yellow;
+			color: $cyan;
 			font-size: 1.6rem;
 			// transition: all 0.3s ease-in-out;
 		}
@@ -74,7 +71,7 @@
 				position: absolute;
 				top: -1.6rem;
 				left: 3rem;
-				color: $dark_yellow;
+				color: $card-price;
 				font-size: 1.6rem;
 			}
 		}
@@ -85,6 +82,13 @@
 			.header__acc-icon {
 				width: 4rem;
 				border-radius: 50%;
+				cursor: pointer;
+				transition: all 0.2s ease-in-out;
+
+				&:hover {
+					box-shadow:0 0 2rem 0.5rem $cyan;
+					outline: 0.3rem solid $cyan;
+				}
 			}
 
 			.header__acc-menu {

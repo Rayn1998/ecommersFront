@@ -1,4 +1,7 @@
+@use '../../scss/variables' as *;
+
 .items {
+  width: 100%;
   margin: 0 auto;
   display: grid;
   grid-template-columns: repeat(5, 1fr);
@@ -7,20 +10,23 @@
   padding: 2rem 0;
   row-gap: 3rem;
   overflow: hidden;
+  justify-self: flex-start;
+  align-items: start;
+  flex-grow: 1;
 
-  @media screen and (max-width: 1680px) {
+  @media screen and (max-width: $breakpoint1) {
     grid-template-columns: repeat(4, 1fr);
   }
 
-  @media screen and (max-width: 1280px) {
+  @media screen and (max-width: $breakpoint2) {
     grid-template-columns: repeat(3, 1fr);
   }
 
-  @media screen and (max-width: 1024px) {
+  @media screen and (max-width: $breakpoint3) {
     grid-template-columns: repeat(2, 1fr);
   }
 
-  @media screen and (max-width: 640px) {
+  @media screen and (max-width: $breakpoint4) {
     grid-template-columns: 1fr;
   }
 }
@@ -28,4 +34,27 @@
 .pagination {
   display: flex;
   justify-content: center;
+  flex-shrink: 1;
+  flex-grow: 0;
+  height: 0.5rem;
+  gap: 1rem;
+  margin-bottom: 1rem;
+
+  .pagination-item {
+    width: 3rem;
+    height: 3rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: $marine;
+    color: $grey;
+    font-weight: 600;
+    text-decoration: none;
+    cursor: pointer;
+    border-radius: 0.5rem;
+
+    &:active {
+      box-shadow: 0 0 0.5rem 0.5rem $cyan;
+    }
+  }
 }

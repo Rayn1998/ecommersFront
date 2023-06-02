@@ -1,6 +1,7 @@
+import { useRef } from 'react';
 import { Route, Routes, useNavigate } from 'react-router-dom';
 
-import 'bootstrap/dist/css/bootstrap.min.css';
+// import 'bootstrap/dist/css/bootstrap.min.css'
 
 import { useEffect } from 'react';
 import { api } from '../../utils/Api';
@@ -17,6 +18,7 @@ import Profile from '../Profile/Profile';
 import Admin from '../Admin/Admin';
 import Favourites from '../Favourites/Favourites';
 import Payment from '../Payment/Payment';
+import { useCallback } from 'react';
 
 const App = () => {
 	const dispatch = useDispatch();
@@ -50,11 +52,45 @@ const App = () => {
 
 			cart = JSON.parse(localStorage.getItem('cart'));
 			cart && dispatch(setCart(cart));
-			}
+		}
 	}, [localStorage.getItem('token')]);
 
+	const appRef = useRef();
+
+	// const rain = useCallback((amount) => {
+	// 	const node = appRef.current;
+	// 	let i = 0;
+	// 	while (i < amount) {
+	// 		const drop = document.createElement('i');
+
+	// 		const size = Math.random();
+	// 		const posX = Math.floor(Math.random() * window.innerWidth);
+	// 		const delay = Math.random() * -20;
+	// 		const duration = Math.random() * 20;
+
+	// 		drop.style.width = 5 + size + 'px';
+	// 		drop.style.left = posX + 'px';
+	// 		drop.style.animationDelay = delay + 's';
+	// 		drop.style.animationDuration = duration + 1 + 's';
+
+	// 		node.appendChild(drop);
+	// 		i++;
+	// 	}
+	// }, []);
+
+	// useEffect(() => {
+	// 	window.addEventListener('resize', rain);
+	// 	return () => {
+	// 		window.removeEventListener('resize', rain);
+	// 	};
+	// }, [rain]);
+
+	// useEffect(() => {
+	// 	rain(50);
+	// }, []);
+
 	return (
-		<div className='app'>
+		<div className='app' ref={appRef}>
 			<Routes>
 				<Route exact path='/' element={<Main />} />
 				<Route path='/sign-up' element={<SignUp />} />

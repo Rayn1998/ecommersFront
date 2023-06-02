@@ -1,14 +1,46 @@
-$yellow: #F4BF76;
-$dark_yellow: #F2A742;
-$medium: #252F3D;
+$yellow: #f4bf76;
+$dark_yellow: #f2a742;
+$medium: #252f3d;
 $medium_corner: rgba(37, 47, 61, 0.5);
 $medium-half-opaque: rgba(37, 47, 61, 0.5);
-$grey: #DDDDDD;
-$dark_grey: #C9CCCC;
+$dark_grey: #c9cccc;
 $disabled_grey: #565959;
 $blue: #007185;
-$red: #B12704;
-$white: #FFFFFF;
+$red: #b12704;
+$white: #ffffff;
 $black: #000;
 $black_half: rgba(0, 0, 0, 0.1);
 $background-color: rgb(16, 4, 30);
+
+//////////////////////
+
+$marine: #007a8a86;
+$purple-input: #5c0099;
+$purple-dark: #5f008e7c;
+$purple: #560081;
+$purple-dropdown: #64009381;
+$violet: #aa00ff;
+$violet-half-opaque: #aa00ffad;
+$cyan: #00bcd4;
+$cyan-half-opaque:#00bbd480;
+$blue-black: #060c21;
+$blue-dark: #008dd400;
+
+$grey: #dddddd;
+$card-price: #03b17a;
+$brand-card: #86ace5;
+$card-text-shadow: #86e5e5;
+
+$breakpoint1: 1680px;
+$breakpoint2: 1350px;
+$breakpoint3: 1024px;
+$breakpoint4: 640px;
+
+@mixin dropdown {
+	background-color: $purple-dropdown;
+	filter: blur(1rem);
+  opacity: 0;
+	border-radius: 1rem;
+	outline: 0.2rem solid $cyan;
+	box-shadow: inset 0 0 5rem $cyan;
+}
