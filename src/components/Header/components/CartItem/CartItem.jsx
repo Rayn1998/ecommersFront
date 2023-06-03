@@ -2,8 +2,6 @@ import { useState, useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { removeFromCart } from '../../../../redux/slices/cartSlice';
 
-import trashIcon from '../../../../assets/images/trash-bin.png';
-
 const CartItem = ({ props }) => {
 	const cart = useSelector(state => state.cart.data);
 	const dispatch = useDispatch();
@@ -27,16 +25,17 @@ const CartItem = ({ props }) => {
 		setAmount(amount => amount + 1);
 	}, [cart, amount]);
 
-	const decr = useCallback(() => {
+	const decr = useCallback((e) => {
 		if (amount > 1) {
 			changeStorageCartAmount();
 			setAmount(amount => amount - 1)
 		} else {
-			handleDel();
+			handleDel(e);
 		}
 	}, [amount]);
 
-	const handleDel = useCallback(() => {
+	const handleDel = useCallback((e) => {
+		e.stopPropagation();
 		dispatch(removeFromCart(props));
 	}, []);
 	return (

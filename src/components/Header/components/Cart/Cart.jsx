@@ -1,18 +1,22 @@
+import { forwardRef,useCallback } from "react";
+
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
 import CartItem from "../CartItem/CartItem";
 
-const Cart = ({isOpen}) => {
+const Cart = forwardRef((props, ref) => {
+  const { isOpen } = props;
   const cart = useSelector(state => state.cart.data);
   const navigate = useNavigate();
 
-  const handlePay = () => {
+  const handlePay = useCallback((e) => {
     navigate('/payment');
-  }
+  }, []);
 
   return (
     <div 
+      ref={ref}
       className="cart"
       style={{
         opacity: isOpen && 1,
@@ -21,7 +25,10 @@ const Cart = ({isOpen}) => {
       }}
     >
       <div className="items-container">
-        {cart.map(item => <CartItem key={item._id} props={item} />)}
+        {cart.length === 0
+          ? <p className="items-container__nothing">Nothing in the cart...</p>
+          : cart.map(item => <CartItem key={item._id} props={item} />)
+        }
       </div>
       <button
         className="cart__pay"
@@ -29,6 +36,6 @@ const Cart = ({isOpen}) => {
       >Pay!</button>
     </div>
   );
-};
+});
 
 export default Cart;

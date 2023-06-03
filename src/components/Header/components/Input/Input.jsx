@@ -21,13 +21,23 @@ const Input = () => {
 
 	const dropDownRef = useRef();
 
-	const handleOutClick = (e) => {
+	const handleOutClick = useCallback((e) => {
 		if (!dropDownRef.current.contains(e.target)) setDropdownShow(false);
-	}
+	}, []);
+
+	const handleEsc = useCallback((e) => {
+		if (e.key === 'Escape') {
+			setDropdownShow(false);
+		}
+	}, []);
 
 	useEffect(() => {
 		document.addEventListener('click', handleOutClick);
-		return () => document.removeEventListener('click', handleOutClick);
+		document.addEventListener('keydown', handleEsc);
+		return () => {
+			document.removeEventListener('click', handleOutClick);
+			document.removeEventListener('keydown', handleEsc);
+		}
 	}, []);
 
 	return (

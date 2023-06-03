@@ -66,7 +66,8 @@ const GoodItem = ({ props }) => {
 		}, 2000);
 	}, [rotateX, rotateY]);
 
-	const handleClick = () => {
+	const handleClick = (e) => {
+		e.stopPropagation();
 		navigate(`/item/:${id}`);
 	}
 
@@ -78,7 +79,8 @@ const GoodItem = ({ props }) => {
 		return cart.some((item) => item._id === id);
 	}, [cart]);
 
-	const handleFav = useCallback(() => {
+	const handleFav = useCallback((e) => {
+		e.stopPropagation();
 		if (checkFav()) {
 			api
 				.removeFavourite(id)
@@ -94,7 +96,8 @@ const GoodItem = ({ props }) => {
 		}
 	}, [userFavs]);
 
-	const handleCartClick = useCallback(() => {
+	const handleCartClick = useCallback((e) => {
+		e.stopPropagation();
 		if (checkInCart()) {
 			dispatch(removeFromCart(props));
 			setInCart(false);
@@ -182,9 +185,7 @@ const GoodItem = ({ props }) => {
 						setOnBuy(true)
 					}}
 					onMouseLeave={() => setOnBuy(false)}
-					onClick={() => {
-						handleCartClick();
-					}}
+					onClick={handleCartClick}
 				></div>
 				<p
 					className='good-item__buy-text'
@@ -192,9 +193,7 @@ const GoodItem = ({ props }) => {
 						setOnBuy(true);
 					}}
 					onMouseLeave={() => setOnBuy(false)}
-					onClick={() => {
-						handleCartClick();
-					}}
+					onClick={handleCartClick}
 				>
 					BUY
 				</p>

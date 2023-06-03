@@ -1,14 +1,14 @@
+import { useCallback, useState, useRef, useEffect } from 'react';
+import { useNavigate, useLocation } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
+import { setUserDefault } from '../../redux/slices/userSlice';
+
 import amazonLogo from '../../assets/images/amazon_logo.png';
 import imageFav from '../../assets/images/fav.png';
 import imageFavActive from '../../assets/images/fav_active.png';
 import cartIcon from '../../assets/images/cartIcon.png';
 import cartIcon_active from '../../assets/images/cartIcon_active.png';
 import accIcon from '../../assets/images/profile_imagejpg.jpg';
-
-import { useSelector, useDispatch } from 'react-redux';
-import { setUserDefault } from '../../redux/slices/userSlice';
-import { useCallback, useState } from 'react';
-import { useNavigate, useLocation } from 'react-router-dom';
 
 import Input from './components/Input/Input';
 import Cart from './components/Cart/Cart';
@@ -51,6 +51,30 @@ const Header = () => {
 	const handleCartClick = useCallback(() => {
 		setIsCartOpen((state) => !state);
 	}, []);
+
+	const cartRef = useRef();
+	const cartIconRef = useRef();
+
+	const handleMouseOutOfCart = useCallback((e) => {
+		if (!cartRef.current.contains(e.target) && !cartIconRef.current.contains(e.target)) setIsCartOpen(false);
+	}, [isCartOpen]);
+
+	useEffect(() => {
+		document.addEventListener('click', handleMouseOutOfCart);
+		return () => document.removeEventListener('click', handleMouseOutOfCart);
+	}, []);
+
+	const handleEsc = useCallback((e) => {
+		if (e.key === 'Escape') {
+			setIsCartOpen(false);
+		}
+	}, []);
+
+	useEffect(() => {
+		document.addEventListener('keydown', handleEsc);
+		return () => document.removeEventListener('keydown', handleEsc);
+	}, []);
+
 	return (
 		<div className='header'>
 			<img
@@ -83,6 +107,7 @@ const Header = () => {
 						src={checkCart() ? cartIcon_active : cartIcon}
 						alt='Cart Icon'
 						onClick={handleCartClick}
+						ref={cartIconRef}
 					/>
 					<div
 						className='header__cart-logo-counter'
@@ -94,7 +119,7 @@ const Header = () => {
 					>
 						{cart.length}
 					</div>
-					<Cart isOpen={isCartOpen} />
+					<Cart ref={cartRef} isOpen={isCartOpen} />
 				</div>
 
 				<div

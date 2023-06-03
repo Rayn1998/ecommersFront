@@ -4,6 +4,8 @@
   @include dropdown;
   width:30rem;
   height: fit-content;
+  max-height: 50rem;
+  overflow-y: scroll;
   position: absolute;
   top: 4rem;
   left: -20rem;
@@ -21,10 +23,15 @@
     flex-direction: column;
     justify-content: flex-start;
     gap: 1rem;
+
+    .items-container__nothing {
+      font-size: 2rem;
+      padding: 2rem;
+    }
   }
 
   .cart__pay {
-    height: 2.5rem;
+    min-height: 2.5rem;
     margin-top: 1rem;
     background-color: transparent;
     backdrop-filter: blur(20px);

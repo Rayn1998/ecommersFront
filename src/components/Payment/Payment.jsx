@@ -4,7 +4,6 @@ import Layout from '../Layout/Layout';
 
 const Payment = () => {
   const cart = useSelector(state => state.cart.data);
-  console.log(cart);
   return (
     <>
       <Layout />
