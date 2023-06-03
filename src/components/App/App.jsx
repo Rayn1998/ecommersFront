@@ -2,6 +2,10 @@ import { useRef } from 'react';
 import { Route, Routes, useNavigate } from 'react-router-dom';
 
 // import 'bootstrap/dist/css/bootstrap.min.css'
+import particlesConfig from '../../particlesjs-config.json';
+import Particles from 'react-tsparticles';
+import { loadFull } from 'tsparticles';
+//////////////////////////
 
 import { useEffect } from 'react';
 import { api } from '../../utils/Api';
@@ -55,52 +59,36 @@ const App = () => {
 		}
 	}, [localStorage.getItem('token')]);
 
-	const appRef = useRef();
+	// PARTICLES ///////////////////////////
+	const particlesInit = useCallback(async (engine) => {
+		console.log(engine);
+		await loadFull(engine);
+	}, []);
 
-	// const rain = useCallback((amount) => {
-	// 	const node = appRef.current;
-	// 	let i = 0;
-	// 	while (i < amount) {
-	// 		const drop = document.createElement('i');
-
-	// 		const size = Math.random();
-	// 		const posX = Math.floor(Math.random() * window.innerWidth);
-	// 		const delay = Math.random() * -20;
-	// 		const duration = Math.random() * 20;
-
-	// 		drop.style.width = 5 + size + 'px';
-	// 		drop.style.left = posX + 'px';
-	// 		drop.style.animationDelay = delay + 's';
-	// 		drop.style.animationDuration = duration + 1 + 's';
-
-	// 		node.appendChild(drop);
-	// 		i++;
-	// 	}
-	// }, []);
-
-	// useEffect(() => {
-	// 	window.addEventListener('resize', rain);
-	// 	return () => {
-	// 		window.removeEventListener('resize', rain);
-	// 	};
-	// }, [rain]);
-
-	// useEffect(() => {
-	// 	rain(50);
-	// }, []);
+	const particlesLoaded = useCallback(async (container) => {
+		await console.log(container);
+	}, []);
 
 	return (
-		<div className='app' ref={appRef}>
-			<Routes>
-				<Route exact path='/' element={<Main />} />
-				<Route path='/sign-up' element={<SignUp />} />
-				<Route path='/sign-in' element={<SignIn />} />
-				<Route path='/profile' element={<Profile />} />
-				<Route path='/admin' element={<Admin />} />
-				<Route path='/favourites' element={<Favourites />} />
-				<Route path='/payment' element={<Payment />} />
-			</Routes>
-		</div>
+		<>
+			<div className='app'>
+				<Routes>
+					<Route exact path='/' element={<Main />} />
+					<Route path='/sign-up' element={<SignUp />} />
+					<Route path='/sign-in' element={<SignIn />} />
+					<Route path='/profile' element={<Profile />} />
+					<Route path='/admin' element={<Admin />} />
+					<Route path='/favourites' element={<Favourites />} />
+					<Route path='/payment' element={<Payment />} />
+				</Routes>
+			</div>
+			<Particles
+				id='particles'
+				init={particlesInit}
+				loaded={particlesLoaded}
+				options={particlesConfig}
+			/>
+		</>
 	);
 };
 

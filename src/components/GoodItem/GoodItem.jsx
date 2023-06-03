@@ -89,9 +89,9 @@ const GoodItem = ({ props }) => {
 
 
 	useEffect(() => {
-		const inCart = cart.some(item => item._id === id);
-		inCart && setInCart(true);
-	}, [])
+		const state = cart.some(item => item._id === id);
+		setInCart(state);
+	}, [cart])
 
 	return (
 		<div
@@ -152,7 +152,7 @@ const GoodItem = ({ props }) => {
 				<div
 					className='good-item__buy-wrapper'
 					style={{
-						backgroundColor: ((onBuy && inCart) || inCart) && '#03b17a' || onBuy && '#d901c366',
+						backgroundColor: inCart && '#03b17a' || onBuy && '#d901c366',
 					}}
 					onMouseOver={() => {
 						setOnBuy(true)

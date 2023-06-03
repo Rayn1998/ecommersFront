@@ -111,6 +111,7 @@ const Header = () => {
 										visibility: 'visible',
 										transform: 'translateX(0)',
 										opacity: 1,
+										filter: 'blur(0)'
 								  }
 								: {
 										visibility: 'hidden',
@@ -120,7 +121,7 @@ const Header = () => {
 						}
 					>
 						<p>
-							Welcome back, <strong>{user.name}</strong>
+							Welcome back, <strong className='header__acc-name'>{user.name}</strong>
 						</p>
 						<li onClick={handleProfile}>My profile</li>
 						{user.role === 'admin' && (

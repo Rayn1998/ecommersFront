@@ -1,4 +1,3 @@
-import { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 
 import Layout from '../Layout/Layout';
@@ -8,16 +7,12 @@ import GoodItem from '../GoodItem/GoodItem';
 const Favourites = () => {
 	const userFavourites = useSelector((state) => state.user.data.favourites);
 
-	// useEffect(() => {
-	// 	console.log(userFavourites);
-	// }, [userFavourites])
-
 	return (
 		<>
 			<Layout />
 			<ItemsContainer>
 				{userFavourites.length === 0 ? (
-					<p className='no-favs'>There is no favourites yet...</p>
+					<p className='no-favs'>There are no favourites yet...</p>
 				) : (
 					userFavourites.map((fav) => <GoodItem key={fav._id} props={fav} />)
 				)}

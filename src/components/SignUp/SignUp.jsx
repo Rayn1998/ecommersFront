@@ -1,9 +1,9 @@
 import { useCallback } from 'react';
 import { useForm } from 'react-hook-form';
-import { useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom';
 import { api } from '../../utils/Api';
 import { emailCheck } from '../../utils/regExpressions';
-  
+
 const SignUp = () => {
 	const {
 		register,
@@ -50,7 +50,7 @@ const SignUp = () => {
 								pattern: {
 									value: emailCheck,
 									message: 'Email is incorrect',
-								}
+								},
 							})}
 							placeholder='Email'
 						/>
@@ -63,7 +63,13 @@ const SignUp = () => {
 					<div>
 						<input
 							className='signup__form-input'
-							{...register('password', { required: 'Password is required', minLength: { value: 8, message: 'Password must be at least 8 symbols' } })}
+							{...register('password', {
+								required: 'Password is required',
+								minLength: {
+									value: 8,
+									message: 'Password must be at least 8 symbols',
+								},
+							})}
 							type='password'
 							placeholder='Password'
 						/>
@@ -75,7 +81,9 @@ const SignUp = () => {
 				{/* INPUT SUBMIT */}
 				<div className='signup__form-submit-wrapper'>
 					<input className='signup__form-submit' type='submit' />
-					<p className='signin' onClick={() => navigate('/sign-in')}>Sing In</p>
+					<p className='signin' onClick={() => navigate('/sign-in')}>
+						Sing In
+					</p>
 				</div>
 			</form>
 		</div>

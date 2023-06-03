@@ -14,8 +14,12 @@
   min-height: 100vh;
   height: fit-content;
   background-position: center;
+  position: relative;
+  z-index: 1;
   // background-size: cover;
-  background-color: $background-color;
+  // background-color: $background-color;
+  background-color: transparent;
+  backdrop-filter: blur(2px);
   // overflow: hidden;
 
   // i {

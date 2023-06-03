@@ -16,7 +16,7 @@
 }
 
 .header {
-	background-color: rgba(170, 0, 255, 0.1);
+	background-color: #aa00ff1a;
 	height: 10rem;
 	display: flex;
 	align-items: center;
@@ -54,7 +54,6 @@
 			left: 3rem;
 			color: $cyan;
 			font-size: 1.6rem;
-			// transition: all 0.3s ease-in-out;
 		}
 
 		.cart-wrapper {
@@ -92,13 +91,12 @@
 			}
 
 			.header__acc-menu {
+				@include dropdown;
 				z-index: 2;
 				min-width: 20rem;
 				position: absolute;
 				top: 5rem;
 				left: -16rem;
-				background-color: $white;
-				outline: solid $yellow 0.25rem;
 				list-style: none;
 				width: 10rem;
 				padding: 2rem;
@@ -110,11 +108,40 @@
 				visibility: hidden;
 				transition: all 0.4s ease-in-out;
 
+				.header__acc-name {
+					color: $card-price;
+				}
+
 				li {
 					cursor: pointer;
+					position: relative;
 
 					&:hover {
-						color: $yellow;
+						text-shadow: 0 0 1rem $cyan;
+					}
+	
+					&:hover::before {
+						width: 100%;
+						opacity: 1;
+						transform: translateX(-8%);
+					}
+	
+					&::before {
+						content: '';
+						width: 0;
+						transform: translateX(50%);
+						height: 2rem;
+						position: absolute;
+						top: 0;
+						left: 0.3rem;
+						z-index: -1;
+						border: 0.5rem solid $card-price;
+						border-top-color: transparent;
+						border-bottom-color: transparent;
+						
+						opacity: 0;
+						filter: blur(0.2rem) brightness(2);
+						transition: all 0.15s ease-in-out;
 					}
 				}
 			}
