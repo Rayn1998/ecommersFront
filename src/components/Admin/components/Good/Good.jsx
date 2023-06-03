@@ -23,14 +23,16 @@ const Good = ({ props }) => {
 	return (
 		<div className='good'>
 			<img className='good-img' src={props.image} alt={props.name} />
-			<div className='good-text'>
-				<p className='good-name'>Name: {props.name}</p>
-				<p className='good-brand'>Brand: {props.brand}</p>
+			<div className='good-inner-wrapper'>
+				<div className='good-text'>
+					<p className='good-name'>Name: {props.name}</p>
+					<p className='good-brand'>Brand: {props.brand}</p>
+				</div>
+				<button className='good-change-btn' onClick={handleChangeClick}>
+					Change data
+				</button>
 			</div>
-			<button className='good-change-btn' onClick={handleChangeClick}>
-				Change data
-			</button>
-			<input type='button' value='X' onClick={handleXClick} />
+			<button className='good-delete-btn' type='button' onClick={handleXClick}></button>
 		</div>
 	);
 };

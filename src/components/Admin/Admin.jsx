@@ -1,4 +1,4 @@
-import { useCallback } from 'react';
+import { useCallback, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { setOpen } from '../../redux/slices/popups/createGoodPopup';
 
@@ -10,6 +10,9 @@ const Admin = () => {
 	const goods = useSelector(state => state.goods.goods);
 	const users = useSelector(state => state.users.users);
 	const dispatch = useDispatch();
+	// console.log(goods)
+
+	const [input, setInput] = useState('');
 
 	const handleCreateGood = useCallback(() => {
 		dispatch(setOpen('create'));
@@ -19,14 +22,25 @@ const Admin = () => {
 			<Layout />
 			<div className='admin'>
 				<div className='goods-list'>
-					<input 
-						type='button' 
-						value='Create new good' 
-						onClick={handleCreateGood}
-					/>
-          {goods.map(good => {
-            return <Good key={good._id} props={good} />
-          })}
+					<div className='goods-list__navigation'>
+						<button 
+							className='goods-list__navigation-add'
+							type='button' 
+							onClick={handleCreateGood}
+						>Create new good</button>
+						<input 
+							placeholder='Search...' className='goods-list__navigation-search' 
+							value = {input}
+							onChange = {(e) => setInput(e.target.value)}
+						/>
+					</div>
+					{input === ''
+						? (goods.map(good => {
+							return <Good key={good._id} props={good} />
+						}))
+						: (goods.filter(good => {
+							return good.name.toLowerCase().includes(input.toLowerCase())}).map(item => <Good key={item._id} props={item} />)
+						)}
         </div>
 				<div className='users-list'>
           {users.map(user => {

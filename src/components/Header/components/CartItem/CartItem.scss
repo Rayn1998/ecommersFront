@@ -50,16 +50,20 @@
   }
 
   .cart-item__delete {
-    width: 2rem;
-    height: 2rem;
-    background-color: $cyan;
+    width: 3rem;
+    height: 3rem;
+    background-color: transparent;
     color: $grey;
     border: none;
     border-radius: 1rem;
     cursor: pointer;
+    background-image: url('../../../../assets/images/trash-bin.png');
+    background-size: cover;
+    position: relative;
+    transition: opacity 0.1s ease-in-out;
     
     &:hover {
-      box-shadow: 0 0 0.3rem 0.3rem $card-price;
+      opacity: 0.75;
     }
   }
 }

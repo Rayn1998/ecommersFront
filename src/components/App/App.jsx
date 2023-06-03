@@ -1,4 +1,4 @@
-import { useRef } from 'react';
+import { useCallback } from 'react';
 import { Route, Routes, useNavigate } from 'react-router-dom';
 
 // import 'bootstrap/dist/css/bootstrap.min.css'
@@ -22,7 +22,7 @@ import Profile from '../Profile/Profile';
 import Admin from '../Admin/Admin';
 import Favourites from '../Favourites/Favourites';
 import Payment from '../Payment/Payment';
-import { useCallback } from 'react';
+import GoodPage from '../GooPage/GoodPage';
 
 const App = () => {
 	const dispatch = useDispatch();
@@ -61,12 +61,11 @@ const App = () => {
 
 	// PARTICLES ///////////////////////////
 	const particlesInit = useCallback(async (engine) => {
-		console.log(engine);
 		await loadFull(engine);
 	}, []);
 
 	const particlesLoaded = useCallback(async (container) => {
-		await console.log(container);
+		// await console.log(container);
 	}, []);
 
 	return (
@@ -80,6 +79,7 @@ const App = () => {
 					<Route path='/admin' element={<Admin />} />
 					<Route path='/favourites' element={<Favourites />} />
 					<Route path='/payment' element={<Payment />} />
+					<Route path='/item/:id' element={<GoodPage />} />
 				</Routes>
 			</div>
 			<Particles

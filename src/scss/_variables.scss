@@ -18,14 +18,16 @@ $marine: #007a8a86;
 $purple-input: #5c0099;
 $purple-dark: #5f008e7c;
 $purple: #560081;
+$purple-half-opaque: #5600817a;
 $purple-light: #6d00a3;
 $purple-dropdown: #64009381;
 $violet: #aa00ff;
 $violet-half-opaque: #aa00ffad;
 $cyan: #00bcd4;
-$cyan-half-opaque:#00bbd480;
+$cyan-half-opaque: #00bbd480;
 $blue-black: #060c21;
 $blue-dark: #008dd400;
+$button-bg: rgba(0, 147, 205, 0.475);
 
 $grey: #dddddd;
 $card-price: #03b17a;
@@ -40,8 +42,24 @@ $breakpoint4: 640px;
 @mixin dropdown {
 	background-color: $purple-dropdown;
 	filter: blur(1rem);
-  opacity: 0;
+	opacity: 0;
 	border-radius: 1rem;
 	outline: 0.2rem solid $cyan;
 	box-shadow: inset 0 0 5rem $cyan;
+}
+
+@mixin deleteButton {
+	width: 3rem;
+	height: 3rem;
+	background-color: transparent;
+	background-image: url('../../../../assets/images/trash-bin.png');
+	background-size: cover;
+	border: none;
+	cursor: pointer;
+	opacity: 1;
+	transition: opacity 0.1s ease-in-out;
+
+	&:hover {
+		opacity: 0.75;
+	}
 }

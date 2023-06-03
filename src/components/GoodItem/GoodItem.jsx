@@ -1,4 +1,6 @@
 import { useCallback, useState, useEffect, useRef } from 'react';
+import { useNavigate } from 'react-router-dom';
+
 import { useDispatch, useSelector } from 'react-redux';
 import { addFavourite, removeFavourite } from '../../redux/slices/userSlice';
 import {
@@ -14,7 +16,8 @@ import cartIcon from '../../assets/images/cartIcon.png';
 import cartIconActive from '../../assets/images/cartIcon_active.png';
 
 const GoodItem = ({ props }) => {
-	 // TODO: не отключается кнопка BUY, если убрать карточку из корзины
+	const navigate = useNavigate();
+
 	const userFavs = useSelector((state) => state.user.data.favourites);
 	const cart = useSelector((state) => state.cart.data);
 	const dispatch = useDispatch();
@@ -46,11 +49,26 @@ const GoodItem = ({ props }) => {
 		setRotateX(offsetY);
 	};
 
-	useEffect(() => {
+	const handleMouseOn = () => {
 		const node = cardRef.current;
 		node.addEventListener('mousemove', rotateCard);
-		return () => node.removeEventListener('mousemove', rotateCard);
-	}, []);
+	}
+
+	const handleMouseLeave = useCallback(() => {
+		const node = cardRef.current;
+		node.removeEventListener('mousemove', rotateCard);
+		const interval = setInterval(() => {
+			setRotateX(rotateX => ((rotateX *= 0.9) * 1000) / 1000);
+			setRotateY(rotateY => ((rotateY *= 0.9) * 1000) / 1000);
+		}, 50);
+		setTimeout(() => {
+			window.clearInterval(interval);
+		}, 2000);
+	}, [rotateX, rotateY]);
+
+	const handleClick = () => {
+		navigate(`/item/:${id}`);
+	}
 
 	const checkFav = useCallback(() => {
 		return userFavs.some((fav) => fav._id === id);
@@ -84,7 +102,8 @@ const GoodItem = ({ props }) => {
 		}
 		setOnBuy(false);
 		setInCart(true);
-		cart ? dispatch(addToCart(props)) : dispatch(setCart(props));
+		const item = { ...props, amount: 1 };
+		cart ? dispatch(addToCart(item)) : dispatch(setCart(item));
 	}, [cart, inCart]);
 
 
@@ -100,8 +119,12 @@ const GoodItem = ({ props }) => {
 			onMouseEnter={(e) => {
 				rotateCard(e);
 				setOnMouse(true);
+				handleMouseOn();
 			}}
-			onMouseLeave={() => setOnMouse(false)}
+			onMouseLeave={() => {
+				setOnMouse(false);
+				handleMouseLeave();
+			}}
 			style={{
 				transform: `rotateX(${rotateX}deg) rotateY(${rotateY}deg)`,
 			}}
@@ -112,8 +135,9 @@ const GoodItem = ({ props }) => {
 					visibility: onMouse ? 'visible' : 'hidden',
 					transition: 'visibility 0.3s ease-in-out',
 				}}
+				
 			></div>
-			<div className='good-item__image-wrapper'>
+			<div className='good-item__image-wrapper' onClick={handleClick}>
 				<div className='good-item__corner'></div>
 					<div
 						className='image-fav'

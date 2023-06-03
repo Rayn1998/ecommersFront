@@ -1,20 +1,39 @@
 import { useState, useCallback } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { removeFromCart } from '../../../../redux/slices/cartSlice';
 
-const CartItem = ({ props }) => {
-	const dispatch = useDispatch();
+import trashIcon from '../../../../assets/images/trash-bin.png';
 
-	const [amount, setAmount] = useState(1);
+const CartItem = ({ props }) => {
+	const cart = useSelector(state => state.cart.data);
+	const dispatch = useDispatch();
+	
+	const [amount, setAmount] = useState(props.amount);
+	const changeStorageCartAmount = useCallback((action) => {
+		const storageCart = JSON.parse(localStorage.getItem('cart'));
+ 	 	const cart = storageCart.map(item => {
+    if (item._id === props._id) {
+      item.amount = action === 'incr' ? amount + 1 : amount - 1;
+      return item;
+    } else {
+      return item;
+    }
+  });
+  localStorage.setItem('cart', JSON.stringify(cart));
+	}, [amount]);
 
 	const incr = useCallback(() => {
+		changeStorageCartAmount('incr');
 		setAmount(amount => amount + 1);
-	}, []);
+	}, [cart, amount]);
 
 	const decr = useCallback(() => {
-		amount > 1 
-		? setAmount(amount => amount - 1)
-		: handleDel();
+		if (amount > 1) {
+			changeStorageCartAmount();
+			setAmount(amount => amount - 1)
+		} else {
+			handleDel();
+		}
 	}, [amount]);
 
 	const handleDel = useCallback(() => {
@@ -33,7 +52,7 @@ const CartItem = ({ props }) => {
 			<button
 				className='cart-item__delete'
 				onClick={handleDel}
-			>X</button>
+			></button>
 		</div>
 	);
 };

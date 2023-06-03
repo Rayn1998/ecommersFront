@@ -7,12 +7,15 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background-color: $grey;
+  background-color: $purple-half-opaque;
   border-radius: 1rem;
-  border: 0.1rem solid $medium;
+  outline: 0.2rem solid $violet;
+  box-shadow: inset 0 0 3rem $purple-light;
 
   .good-img {
     width: 14rem;
+    height: 14rem;
+    object-fit: cover;
     padding: 1.5rem;
     border-radius: 2.5rem;
   }
@@ -22,23 +25,38 @@
     height: 6rem;
     border-radius: 2rem;
     border: none;
-    box-shadow: 0 0 0.2rem $disabled_grey;
-    background-color: $yellow;
+    background-color: $cyan-half-opaque;
+    color: $brand-card;
     font-size: 1.6rem;
+    transition: all 0.1s ease-in-out;
+    cursor: pointer;
+    outline: 0.2rem solid $cyan;
 
     &:hover {
-      background-color: $dark_yellow;
+      background-color: $button-bg;
     }
   }
 
-  .good-text {
+  .good-inner-wrapper {
+    width: 40rem;
     display: flex;
-    flex-direction: column;
-    gap: 1rem;
-    width: fit-content;
+    justify-content: space-between;
 
-    p {
-      font-size: 2rem;
-    }
+    .good-text {
+      display: flex;
+      flex-direction: column;
+      width: 12rem;
+      gap: 1rem;
+      width: fit-content;
+  
+      p {
+        font-size: 2rem;
+      }
+  }
+
+  }
+
+  .good-delete-btn {
+    @include deleteButton;
   }
 }

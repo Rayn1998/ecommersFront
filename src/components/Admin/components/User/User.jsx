@@ -9,7 +9,7 @@ const User = ({props}) => {
           <option name='admin'>Admin</option>
         </select>
       </div>
-      <input type='button' value='X' />
+      <button className='user__delete-btn' type='button'></button>
     </div>
   );
 };
