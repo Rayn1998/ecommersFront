@@ -68,7 +68,9 @@ const App = () => {
 	}, [onParticles]);
 
 	const handleButtonsHover = useCallback(() => {
-		setOnButtonsHover(!onButtonsHover);
+		!onButtonsHover 
+			? setOnButtonsHover(true)
+			: setTimeout(setTimeout(() => setOnButtonsHover(false), 1000));
 	})
 
 	const particlesInit = useCallback(async (engine) => {
@@ -97,6 +99,9 @@ const App = () => {
 					className='buttons__hover'
 					onMouseEnter={handleButtonsHover}
 					onMouseLeave={handleButtonsHover}
+					style={{
+						opacity: onButtonsHover && 1,
+					}}
 				>
 					<button
 						className='particles-switcher'

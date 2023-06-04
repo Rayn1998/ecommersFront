@@ -51,7 +51,7 @@ const Main = () => {
 	const break1 = 640;
 	const break2 = 1024;
 	const break3 = 1350;
-	const break4 = 1680;
+	const break4 = 1800;
 
 	const checkWidth = useCallback(() => {
 		if (window.innerWidth <= break1) {

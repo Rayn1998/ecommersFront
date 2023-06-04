@@ -34,7 +34,7 @@ $card-price: #03b17a;
 $brand-card: #86ace5;
 $card-text-shadow: #86e5e5;
 
-$breakpoint1: 1680px;
+$breakpoint1: 1800px;
 $breakpoint2: 1350px;
 $breakpoint3: 1024px;
 $breakpoint4: 640px;
@@ -61,5 +61,39 @@ $breakpoint4: 640px;
 
 	&:hover {
 		opacity: 0.75;
+	}
+}
+
+@mixin flowButton {
+	overflow: hidden;
+	position: relative;
+	outline: 0.1rem solid $cyan;
+	box-shadow: inset 0 0 2rem 0.4rem $card-price;
+	cursor: pointer;
+	background-color: transparent;
+	backdrop-filter: blur(20px);
+	border: none;
+	color:$grey;
+
+	&::before {
+		content: '';
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		z-index: -1;
+		border-radius: 1rem;
+		background-color: $card-price;
+		transform: translateX(-100%);
+		transition: all 0.5s ease-in-out;
+	}
+
+	&:hover::before {
+		transform: translateX(0);
+	}
+
+	&:active::before {
+		background-color: $cyan;
 	}
 }

@@ -31,39 +31,10 @@
   }
 
   .cart__pay {
+    @include flowButton;
     min-height: 2.5rem;
     margin-top: 1rem;
-    background-color: transparent;
-    backdrop-filter: blur(20px);
-    border: none;
     border-radius: 1rem;
-    cursor: pointer;
     color: $grey;
-    outline: 0.1rem solid $cyan;
-    box-shadow: inset 0 0 2rem 0.4rem $card-price;
-    overflow: hidden;
-    position: relative;
-
-    &::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      z-index: -1;
-      border-radius: 1rem;
-      background-color: $card-price;
-      transform: translateX(-100%);
-      transition: all 0.5s ease-in-out;
-    }
-
-    &:hover::before {
-      transform: translateX(0);
-    }
-
-    &:active::before {
-      background-color: $cyan;
-    }
   }
 }
