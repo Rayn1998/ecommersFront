@@ -7,7 +7,7 @@ import Particles from 'react-tsparticles';
 import { loadFull } from 'tsparticles';
 //////////////////////////
 
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { api } from '../../utils/Api';
 import { useDispatch } from 'react-redux';
 import { setGoods } from '../../redux/slices/goodsSlice';
@@ -25,6 +25,9 @@ import Payment from '../Payment/Payment';
 import GoodPage from '../GooPage/GoodPage';
 
 const App = () => {
+
+	const [onParticles, setOnParticles] = useState(true);
+
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
 
@@ -60,6 +63,10 @@ const App = () => {
 	}, [localStorage.getItem('token')]);
 
 	// PARTICLES ///////////////////////////
+	const handleParticles = useCallback(() => {
+		setOnParticles(!onParticles);
+	}, [onParticles]);
+
 	const particlesInit = useCallback(async (engine) => {
 		await loadFull(engine);
 	}, []);
@@ -70,7 +77,17 @@ const App = () => {
 
 	return (
 		<>
-			<div className='app'>
+			<div 
+				className='app' 
+				style={{
+					backgroundColor: !onParticles && '#10041e'
+				}}
+				>
+				<button 
+					className='particles-switcher' 
+					type='button'
+					onClick={handleParticles}
+				>Particles</button>
 				<Routes>
 					<Route exact path='/' element={<Main />} />
 					<Route path='/sign-up' element={<SignUp />} />
@@ -82,12 +99,12 @@ const App = () => {
 					<Route path='/item/:id' element={<GoodPage />} />
 				</Routes>
 			</div>
-			<Particles
+			{onParticles && <Particles
 				id='particles'
 				init={particlesInit}
 				loaded={particlesLoaded}
 				options={particlesConfig}
-			/>
+			/>}
 		</>
 	);
 };

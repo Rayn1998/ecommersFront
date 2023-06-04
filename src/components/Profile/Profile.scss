@@ -1,40 +1,104 @@
 @use '../../scss/variables' as *;
 
+@mixin container {
+	background-color: $marine;
+	padding: 3rem;
+	border-radius: 3rem;
+	outline: 0.2rem solid $cyan;
+	box-shadow: inset 0 0 5rem $cyan-half-opaque;
+}
+
 .profile-area {
-	margin: 1rem auto 0;
-	min-width: 5rem;
-	min-height: 5rem;
+	box-sizing: border-box;
+	margin: 4rem 10rem;
+	padding: 4rem;
+	height: 70vh;
 	color: $white;
 	font-size: 1.6rem;
 	display: flex;
-	flex-direction: column;
 	align-items: center;
+	justify-content: center;
 	color: #000;
-	background-size: contain;
-	border-radius: 50%;
+	background-color: $purple-half-opaque;
+	outline: 0.2rem solid $violet;
+	box-shadow: inset 0 0 3rem $purple-light;
+	border-radius: 3rem;
 
-	form {
+	.profile {
 		display: flex;
-		flex-direction: column;
-		gap: 1rem;
-	}
+		justify-content: space-between;
+		gap: 3rem;
+		width: 100%;
+		height: 100%;
+		color: $grey;
 
-	.field-wrapper {
-		display: flex;
-    justify-content: space-between;
-		gap: 2rem;
-
-		.input-wrapper {
+		form {
+			@include container;
 			display: flex;
 			flex-direction: column;
+			gap: 1rem;
+			width: 50%;
+		}
 
-			input {
-				width: 25rem;
+		.field-wrapper {
+			display: flex;
+			justify-content: space-between;
+			gap: 2rem;
+
+			.input-wrapper {
+				display: flex;
+				flex-direction: column;
+
+				input {
+					width: 25rem;
+				}
+
+				p {
+					width: fit-content;
+					color: $red;
+				}
 			}
+		}
 
-			p {
-				width: fit-content;
-        color: $red;
+		.profile__info-block {
+			@include container;
+			width: 50%;
+			height: 100%;
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+
+			.profile__info-img-wrapper {
+				width: 15rem;
+				height: 15rem;
+				position: relative;
+				overflow: hidden;
+				border-radius: 50%;
+				cursor: pointer;
+
+				&::before {
+					content: 'Change avatar';
+					text-align: center;
+					font-size: 1.4rem;
+					color: $grey;
+					width: 100%;
+					height: 100%;
+					position: absolute;
+					bottom: 0;
+					left: 0;
+					background-color: $purple-half-opaque;
+					transform: translateY(100%);
+					transition: all 0.3s ease-in-out;
+				}
+
+				&:hover::before {
+					transform: translateY(80%);
+				}
+
+				.profile__info-img {
+					width: 100%;
+					height: 100%;
+				}
 			}
 		}
 	}

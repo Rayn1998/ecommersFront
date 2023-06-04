@@ -22,26 +22,13 @@
   backdrop-filter: blur(2px);
   // overflow: hidden;
 
-  // i {
-  //   position: absolute;
-  //   top: 0;
-  //   left: 0;
-  //   height: 20rem;
-  //   background: linear-gradient(transparent, green);
-  //   border-bottom-left-radius: 1rem;
-  //   border-bottom-right-radius: 1rem;
-  //   animation: flying 5s linear infinite;
-  //   opacity: 0.15;
-    
+  .particles-switcher {
+    position: fixed;
+    top: 1rem;
+    left: 30rem;
+    width: 8rem;
+    height: 3rem;
+    z-index: 3;
+  }
 
-  //   &:nth-child(3n + 1) {
-  //     background: linear-gradient(transparent, purple);
-  //   }
-  //   &:nth-child(3n + 2) {
-  //     background: linear-gradient(transparent, yellow);
-  //   }
-  //   &:nth-child(3n + 3) {
-  //     background: linear-gradient(transparent, violet);
-  //   }
-  // }
 }
