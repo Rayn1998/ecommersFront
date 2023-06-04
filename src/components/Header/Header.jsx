@@ -3,7 +3,7 @@ import { useNavigate, useLocation } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { setUserDefault } from '../../redux/slices/userSlice';
 
-import amazonLogo from '../../assets/images/amazon_logo.png';
+import mainLogo from '../../assets/images/logo.png';
 import imageFav from '../../assets/images/fav.png';
 import imageFavActive from '../../assets/images/fav_active.png';
 import cartIcon from '../../assets/images/cartIcon.png';
@@ -52,6 +52,10 @@ const Header = () => {
 		setIsCartOpen((state) => !state);
 	}, []);
 
+	const handleLogoClick = useCallback(() => {
+		location.pathname !== '/' && navigate('/');
+	}, [location.pathname]);
+
 	const cartRef = useRef();
 	const cartIconRef = useRef();
 
@@ -79,9 +83,9 @@ const Header = () => {
 		<div className='header'>
 			<img
 				className='header__logo'
-				src={amazonLogo}
+				src={mainLogo}
 				alt='Amazon Logo'
-				onClick={() => navigate('/')}
+				onClick={handleLogoClick}
 			/>
 			{location.pathname === '/' && <Input />}
 			<div className='header__icons'>

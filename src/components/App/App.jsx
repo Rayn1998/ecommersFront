@@ -25,8 +25,8 @@ import Payment from '../Payment/Payment';
 import GoodPage from '../GooPage/GoodPage';
 
 const App = () => {
-
 	const [onParticles, setOnParticles] = useState(true);
+	const [onButtonsHover, setOnButtonsHover] = useState(false);
 
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
@@ -67,6 +67,10 @@ const App = () => {
 		setOnParticles(!onParticles);
 	}, [onParticles]);
 
+	const handleButtonsHover = useCallback(() => {
+		setOnButtonsHover(!onButtonsHover);
+	})
+
 	const particlesInit = useCallback(async (engine) => {
 		await loadFull(engine);
 	}, []);
@@ -77,17 +81,33 @@ const App = () => {
 
 	return (
 		<>
-			<div 
-				className='app' 
+			<div
+				className='app'
 				style={{
-					backgroundColor: !onParticles && '#10041e'
+					backgroundColor: !onParticles && '#10041e',
 				}}
+			>
+				<div 
+					className='buttons__arrow'
+					style={{
+						transform: onButtonsHover ? 'translateX(-10rem)' : 'translateX(0)'
+					}}
+				></div>
+				<div 
+					className='buttons__hover'
+					onMouseEnter={handleButtonsHover}
+					onMouseLeave={handleButtonsHover}
 				>
-				<button 
-					className='particles-switcher' 
-					type='button'
-					onClick={handleParticles}
-				>Particles</button>
+					<button
+						className='particles-switcher'
+						type='button'
+						onClick={handleParticles}
+						style={{
+							transform: onButtonsHover ? 'translateX(0)' : 'translateX(-10rem)'
+						}}
+					></button>
+				</div>
+
 				<Routes>
 					<Route exact path='/' element={<Main />} />
 					<Route path='/sign-up' element={<SignUp />} />
@@ -99,12 +119,14 @@ const App = () => {
 					<Route path='/item/:id' element={<GoodPage />} />
 				</Routes>
 			</div>
-			{onParticles && <Particles
-				id='particles'
-				init={particlesInit}
-				loaded={particlesLoaded}
-				options={particlesConfig}
-			/>}
+			{onParticles && (
+				<Particles
+					id='particles'
+					init={particlesInit}
+					loaded={particlesLoaded}
+					options={particlesConfig}
+				/>
+			)}
 		</>
 	);
 };
