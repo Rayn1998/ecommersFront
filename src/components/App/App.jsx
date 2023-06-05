@@ -22,7 +22,7 @@ import Profile from '../Profile/Profile';
 import Admin from '../Admin/Admin';
 import Favourites from '../Favourites/Favourites';
 import Payment from '../Payment/Payment';
-import GoodPage from '../GooPage/GoodPage';
+import GoodPage from '../GoodPage/GoodPage';
 
 const App = () => {
 	const [onParticles, setOnParticles] = useState(true);

@@ -8,6 +8,7 @@ import {
 	setCart,
 	removeFromCart,
 } from '../../redux/slices/cartSlice';
+import { setCurrentGood } from '../../redux/slices/currentGoodSlice';
 import { api } from '../../utils/Api';
 
 import imageFav from '../../assets/images/fav.png';
@@ -68,6 +69,7 @@ const GoodItem = ({ props }) => {
 
 	const handleClick = (e) => {
 		e.stopPropagation();
+		dispatch(setCurrentGood(props));
 		navigate(`/item/:${id}`);
 	}
 

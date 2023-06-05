@@ -6,6 +6,7 @@ import goodsSlice from './slices/goodsSlice';
 import usersSlice from './slices/usersSlice';
 import cartSlice from './slices/cartSlice';
 import cacheSlice from './slices/cacheSlice';
+import currentGood from './slices/currentGoodSlice';
 
 export const store = configureStore({
     reducer: {
@@ -16,5 +17,6 @@ export const store = configureStore({
         users: usersSlice,
         cart: cartSlice,
         cache: cacheSlice,
+        currentGood,
     },
 });
