@@ -1,5 +1,7 @@
 class Api {
-	constructor(url) {
+	url: string;
+
+	constructor(url: string) {
 		this.url = url;
 	}
 

@@ -1,18 +1,23 @@
+@use '../../../../../scss/variables' as *;
+
 .form-input {
   display: flex;
   font-size: 2rem;
   gap: 1rem;
   justify-content: space-between;
-
+  
   .form-input__name {
     min-width: 10rem;
   }
-
+  
   .input-wrapper {
     width: 100%;
   }
-
+  
   .form-input__input {
     width: 100%;
+    background-color: transparent;
+    border: none;
+    border-bottom: 0.1rem solid $blue;
   }
 }

@@ -1,13 +1,5 @@
 @use '../../scss/variables' as *;
 
-@mixin container {
-	background-color: $marine;
-	padding: 3rem;
-	border-radius: 3rem;
-	outline: 0.2rem solid $cyan;
-	box-shadow: inset 0 0 5rem $cyan-half-opaque;
-}
-
 .profile-area {
 	box-sizing: border-box;
 	margin: 4rem auto;
@@ -133,7 +125,7 @@
 			}
 
 			.profile__info-img-wrapper {
-				width: 15rem;
+				// width: ;
 				height: 15rem;
 				position: relative;
 				overflow: hidden;
@@ -162,6 +154,7 @@
 				.profile__info-img {
 					width: 100%;
 					height: 100%;
+					// object-fit: cover;
 				}
 			}
 

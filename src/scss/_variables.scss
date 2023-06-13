@@ -14,6 +14,7 @@ $black_half: rgba(0, 0, 0, 0.1);
 //////////////////////
 
 $background-color: #10041e;
+$background-color-transparent: #10041ea8;
 $marine: #007a8a86;
 $purple-input: #5c0099;
 $purple-dark: #5f008e7c;
@@ -96,4 +97,12 @@ $breakpoint4: 640px;
 	&:active::before {
 		background-color: $cyan;
 	}
+}
+
+@mixin container {
+	background-color: $marine;
+	padding: 3rem;
+	border-radius: 3rem;
+	outline: 0.2rem solid $cyan;
+	box-shadow: inset 0 0 5rem $cyan-half-opaque;
 }

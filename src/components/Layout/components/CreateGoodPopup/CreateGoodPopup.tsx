@@ -7,7 +7,7 @@ import { addOneGood, changeGood } from '../../../../redux/slices/goodsSlice';
 import { removeCache } from '../../../../redux/slices/cacheSlice';
 
 import { api } from '../../../../utils/Api';
-import FormInput from '../../../FormComponents/FormInput';
+import FormInput from './FormComponents/FormInput';
 
 // TYPES
 import { RootState } from 'redux/store';
