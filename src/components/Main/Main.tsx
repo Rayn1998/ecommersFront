@@ -23,8 +23,10 @@ const Main: FC = () => {
 
 	// SEARCH
 	useEffect((): void => {
-		if (input.toLowerCase() !== '') {
-			const newGoods: IGood[] = goods.filter((good) => good.name.toLowerCase().includes(input.toLowerCase()));
+		const inputL: string = input.toLowerCase();
+		if (inputL !== '') {
+			const newGoods: IGood[] = goods.filter((good) => good.name.toLowerCase().includes(inputL)
+				|| good.brand.toLowerCase().includes(inputL));
 			setCurrentGoods(newGoods.slice(firstIndex, lastIndex));
 		} else {
 			setCurrentGoods(goods.slice(firstIndex, lastIndex));

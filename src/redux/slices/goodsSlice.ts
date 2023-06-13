@@ -28,8 +28,26 @@ const goodsSlice = createSlice({
 				return good._id === payload._id ? payload : good;
 			});
 		},
+		filterHighPrice(state) {
+			
+			state.goods = state.goods.sort((a, b) => b.price - a.price);
+		},
+		filterLowPrice(state) {
+			state.goods = state.goods.sort((a, b) => a.price - b.price);
+		},
+		filterMostRated(state) {
+			state.goods = state.goods.sort((a, b) => b.rating - a.rating)
+		}
 	},
 });
 
-export const { setGoods, addOneGood, filterGoods, changeGood } = goodsSlice.actions;
+export const { 
+	setGoods, 
+	addOneGood, 
+	filterGoods, 
+	changeGood, 
+	filterHighPrice,
+	filterLowPrice,
+	filterMostRated,
+} = goodsSlice.actions;
 export default goodsSlice.reducer;

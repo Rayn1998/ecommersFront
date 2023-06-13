@@ -1,3 +1,5 @@
+@use '../../scss/variables' as *;
+
 .main {
   padding-bottom: 2rem;
   overflow: hidden;
@@ -8,14 +10,36 @@
   justify-content: space-between;
 
   .pagination {
-    // shrink-
-    // position: fixed;
-    // bottom: 1rem;
-    // left: 50%;
-    // transform: translateX(-50%);
-    // background-color: transparent;
-    
+    display: flex;
+    justify-content: center;
+    flex-shrink: 1;
+    flex-grow: 0;
+    height: 0.5rem;
+    gap: 1rem;
+    margin-bottom: 1rem;
+  
     .pagination-item {
+      width: 3rem;
+      height: 3rem;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: $marine;
+      color: $grey;
+      font-weight: 600;
+      text-decoration: none;
+      cursor: pointer;
+      border-radius: 0.5rem;
+      transition: box-shadow 0.1s ease-in-out;
+      user-select: none;
+  
+      &:hover {
+        box-shadow: 0 0 0.5rem 0.5rem $cyan;
+      }
+
+      &:active {
+        box-shadow: 0 0 0.5rem 0.5rem $card-price;
+      }
     }
   }
 }

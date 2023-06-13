@@ -38,6 +38,11 @@ const App: FC = () => {
 			api
 				.getUserData()
 				.then((res) => {
+					if (res.message) {
+						localStorage.removeItem('token');
+						navigate('/sign-in');
+						return;
+					}
 					dispatch(setUser({ ...res }));
 				})
 				.catch((err) => console.log(err));
@@ -102,6 +107,7 @@ const App: FC = () => {
 						opacity: onButtonsHover && 1,
 					}}
 				>
+
 					<button
 						className='particles-switcher'
 						type='button'

@@ -147,7 +147,7 @@ const CreateGoodPopup: FC = () => {
 							errors,
 						}}
 					/>
-					<input type='submit' value='Apply' />
+					<button type='submit' className='popup-form__submit-btn'>Apply</button>
 				</form>
 			</div>
 		</div>

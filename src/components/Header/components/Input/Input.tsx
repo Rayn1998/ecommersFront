@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useState, useRef, FC } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { setInput } from '../../../../redux/slices/inputSlice';
+import { filterHighPrice, filterLowPrice, filterMostRated } from 'redux/slices/goodsSlice';
 
 // TYPES
 import { RootState } from 'redux/store';
@@ -11,6 +12,7 @@ const Input: FC = () => {
 
 	const [dropdownShow, setDropdownShow] = useState<boolean>(false);
 	const [onInput, setOnInput] = useState<boolean>(false);
+	const [dropDownValue, setDropDownValue] = useState<string>('All');
 
 	const handleDropdown = useCallback((e) => {
 		dropdownShow
@@ -34,6 +36,21 @@ const Input: FC = () => {
 		}
 	}, []);
 
+	const handleHighPrice = useCallback((e: React.MouseEvent<HTMLLIElement>): void => {
+		setDropDownValue(e.currentTarget.getAttribute('value'));
+		dispatch(filterHighPrice());
+	}, []);
+
+	const handleLowPrice = useCallback((e: React.MouseEvent<HTMLLIElement>): void => {
+		setDropDownValue(e.currentTarget.getAttribute('value'));
+		dispatch(filterLowPrice());
+	}, []);
+
+	const handleMostRated = useCallback((e: React.MouseEvent<HTMLLIElement>): void => {
+		setDropDownValue(e.currentTarget.getAttribute('value'));
+		dispatch(filterMostRated());
+	}, []);
+
 	useEffect(() => {
 		document.addEventListener('click', handleOutClick);
 		document.addEventListener('keydown', handleEsc);
@@ -53,7 +70,7 @@ const Input: FC = () => {
 					boxShadow: (onInput || dropdownShow) && 'inset 0 0 2rem #00bcd4',
 					outline: (onInput || dropdownShow) && '0.1rem solid #00bcd4',
 				}}
-			>All
+			>{dropDownValue}
 				<ul 
 					className='dropdown-list'
 					style={{
@@ -63,23 +80,17 @@ const Input: FC = () => {
 						visibility: dropdownShow ? 'visible' : 'hidden',
 					}}
 				>
-					<li 
-						className='list-item' 
-						value='1'
-					>
+					<li className='list-item' value='All' onClick={e => handleHighPrice(e)}>
 						All
 					</li>
-					<li className='list-item' value='2'>
-						option2
+					<li className='list-item' value='HiPr' onClick={e => handleHighPrice(e)}>
+						Higher price
 					</li>
-					<li className='list-item' value='3'>
-						option3
+					<li className='list-item' value='LoPr' onClick={e => handleLowPrice(e)}>
+						Lower price
 					</li>
-					<li className='list-item' value='4'>
-						option4
-					</li>
-					<li className='list-item' value='5'>
-						option5
+					<li className='list-item' value='MR' onClick={e => handleMostRated(e)}>
+						Most rated
 					</li>
 				</ul>
 			</div>
