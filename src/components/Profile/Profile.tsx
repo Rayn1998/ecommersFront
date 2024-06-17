@@ -46,7 +46,9 @@ const Profile: FC = () => {
 				handleResOk();
 			})
 			.catch((err) => console.log(err));
+			// Нужно дописать понятный вывод ошибки
 	}, [user]);
+
 
 	return (
 		<Layout>

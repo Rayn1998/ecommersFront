@@ -5,6 +5,8 @@ import { useDispatch } from 'react-redux';
 import { filterGoods } from '../../../../redux/slices/goodsSlice';
 import { setOpen } from '../../../../redux/slices/popups/createGoodPopup';
 import { setCache } from '../../../../redux/slices/cacheSlice';
+import { removeFavourite } from 'redux/slices/userSlice';
+import { removeFromCart } from 'redux/slices/cartSlice';
 
 // TYPES
 import IGood from 'types/Good';
@@ -15,6 +17,8 @@ const Good: FC<IGood> = (props) => {
 		api
 			.deleteGood(props._id)
 			.then((res) => {
+				dispatch(removeFavourite(res.good));
+				dispatch(removeFromCart(res.good));
 				dispatch(filterGoods(res));
 			})
 			.catch((err) => console.log(err));

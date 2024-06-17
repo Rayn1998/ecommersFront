@@ -96,7 +96,7 @@ const App: FC = () => {
 				<div 
 					className='buttons__arrow'
 					style={{
-						transform: onButtonsHover ? 'translateX(-10rem)' : 'translateX(0)'
+						transform: onButtonsHover ? 'translateX(-10rem)' : 'translateX(0)',
 					}}
 				></div>
 				<div 

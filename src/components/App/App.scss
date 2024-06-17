@@ -20,24 +20,40 @@
   backdrop-filter: blur(2px);
 
   .buttons__arrow {
-    width: 4rem;
-    height: 4rem;
-    background-image: url('../../assets/images/next.png');
     background-size: contain;
-    position: fixed;
-    top: 52vh;
+    position: sticky;
+    left: 1vw;
+    top: 50vh;
+    z-index: 3;
     transition: all 0.3s ease-in-out;
+
+    &::before {
+      content: '';
+      background-image: url('../../assets/images/next.png');
+      width: 4rem;
+      height: 4rem;
+      position: fixed;
+      background-size: contain;
+    }
   }
 
   .buttons__hover {
-    position: fixed;
-    width: 3rem;
-    height: 80%;
-    background: linear-gradient(90deg, rgba(51,0,134,0.5) 0%, rgba(255,255,255,0) 100%);
-    top: 10%;
-    z-index: 3;
-    opacity: 0;
-    transition: opacity 0.3s ease-in-out;
+    position: sticky;
+    left: 1vw;
+    top: 50vh;
+
+    &::before {
+      content: '';
+      position: fixed;
+      width: 3rem;
+      height: 80vh;
+      background: linear-gradient(90deg, rgba(51,0,134,0.5) 0%, rgba(255,255,255,0) 100%);
+      top: 10%;
+      z-index: 3;
+      opacity: 0;
+      transition: opacity 0.3s ease-in-out;
+    }
+
 
     .particles-switcher {
       position: fixed;
