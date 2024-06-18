@@ -1,4 +1,4 @@
-import { useCallback, FC } from 'react';
+import { useState, useCallback, FC, CSSProperties } from 'react';
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 import { api } from '../../utils/Api';
@@ -10,6 +10,9 @@ import { setUser } from '../../redux/slices/userSlice';
 import IFormValues from 'types/SignUpForm';
 
 const SignIn: FC = () => {
+	const [errStateMsg, setErrStateMsg] = useState<string>('Error');
+	const [visibState, setVisibState] = useState<boolean>(true);
+	const [blicker, setBlicker] = useState<boolean>(false);
 	const dispatch = useDispatch();
 	const {
 		register,
@@ -28,9 +31,19 @@ const SignIn: FC = () => {
 				navigate('/');
 			} else {
 				// TODO: Сделать подсвечивание красным!!!!!!
-				console.log(res.message);
+				setErrStateMsg(res.message);
+				blick();
+				setVisibState(true);
+				setTimeout(() => setVisibState(false), 3000);
 			}
 		});
+	}, []);
+
+	const blick = useCallback(() => {
+		setBlicker(true);
+		setTimeout(() => setBlicker(false), 500);
+		setTimeout(() => setBlicker(true), 1000);
+		setTimeout(() => setBlicker(false), 1500);
 	}, []);
 
 	return (
@@ -70,6 +83,9 @@ const SignIn: FC = () => {
 							})}
 							type='password'
 							placeholder='Password'
+							style={{
+								borderColor: blicker ? 'red' : '',
+							}}
 						/>
 						<p className='signup__form-input-error'>
 							{errors.password?.message}
@@ -78,8 +94,20 @@ const SignIn: FC = () => {
 				</div>
 				{/* INPUT SUBMIT */}
 				<div className='signup__form-submit-wrapper'>
-					<input className='signup__form-submit' type='submit' />
-					<p className='signin' onClick={() => navigate('/sign-up')}>Sing Up</p>
+					<input 
+						className='signup__form-submit' 
+						type='submit'
+						value={visibState ? 'Error' : 'Submit'}
+						style={{
+							backgroundColor: visibState ? '#b12704' : '',
+						}}
+					/>
+					<p 
+						className='signin' 
+						onClick={() => navigate('/sign-up')}
+					>
+						Sing Up
+					</p>
 				</div>
 			</form>
 		</div>

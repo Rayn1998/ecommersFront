@@ -88,16 +88,10 @@ const Profile: FC = () => {
 							</div>
 							<div className='field-wrapper'>
 								<p>Role:</p>
-								<div className='input-wrapper'>
-									<input
-										{...register('role', {
-											required: 'Role is required',
-											pattern: {
-												value: /customer|admin/,
-												message: `Role may be 'customer' or 'admin'`,
-											},
-										})}
-									/>
+								<div 
+									className='input-wrapper'
+								>
+									<input name='role' value={user.role} disabled/>
 									<p>{errors.role?.message}</p>
 								</div>
 							</div>
@@ -126,8 +120,8 @@ const Profile: FC = () => {
 						</div>
 						<div className='profile__info-text-data'>
 							<p className='profile__info-name'>Name: {user.name}</p>
-							<p className='profile__info-email'>Name: {user.email}</p>
-							<p className='profile__info-role'>Name: {user.role}</p>
+							<p className='profile__info-email'>Email: {user.email}</p>
+							<p className='profile__info-role'>Role: {user.role}</p>
 						</div>
 					</div>
 				</div>
