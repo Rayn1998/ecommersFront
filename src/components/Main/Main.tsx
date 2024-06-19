@@ -95,11 +95,11 @@ const Main: FC = () => {
 	return (
 		<div className='main'>
 			<Layout>
-			<ItemsContainer>
-				{currentGoods?.map((item: IGood) => {
-						return <GoodItem key={item._id} {...item} />;
-					})}
-			</ItemsContainer>
+				<ItemsContainer>
+					{currentGoods?.map((item: IGood) => {
+							return <GoodItem key={item._id} {...item} />;
+						})}
+				</ItemsContainer>
 			</Layout>
 			<ul className='pagination'>
 				<li className='pagination-item' onClick={handleFirstPage} >First</li>

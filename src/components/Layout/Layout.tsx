@@ -3,14 +3,11 @@ import { useSelector } from 'react-redux';
 import { RootState } from 'redux/store';
 
 import Header from '../Header/Header';
+import ILayoutProps from 'types/ChildrenProps';
 
 // POPUPS
 import CreateGoodPopup from './components/CreateGoodPopup/CreateGoodPopup';
 
-interface ILayoutProps {
-	props?: any;
-	children?: ReactNode;
-}
 
 const Layout: FC<ILayoutProps> = ({ props, children }) => {
 	const isCreatePopupOpen = useSelector(
