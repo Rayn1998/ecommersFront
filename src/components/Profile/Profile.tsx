@@ -37,7 +37,7 @@ const Profile: FC = () => {
 			role: user.role,
 		},
 	});
-
+	
 	const onSubmit = useCallback((data) => {
 		api
 			.updateUser(data, user._id)

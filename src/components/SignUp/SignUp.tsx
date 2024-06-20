@@ -18,6 +18,7 @@ const SignUp: FC = () => {
 
 	const onSubmit = useCallback((data) => {
 		api.signUp(data).then(() => {
+			// create small notification with thanks for registration
 			console.log('Thanks for the registration)!');
 			navigate('/sign-in');
 		});

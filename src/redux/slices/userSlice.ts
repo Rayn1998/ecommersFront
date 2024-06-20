@@ -19,7 +19,7 @@ const initialState: IUserSlice = {
 		name: 'defaultName',
 		email: 'defaultEmail',
 		favourites: [],
-		role: 'custome',
+		role: 'customer',
 		_id: '',
 	},
 };
@@ -42,10 +42,15 @@ const userSlice = createSlice({
 				(fav: Good) => fav._id !== payload._id
 			);
 		},
+		changeRole(state, { payload }: PayloadAction<string>) {
+			state.data.role = payload;
+		}
 	},
 });
 
-export const { setUser, setUserDefault, addFavourite, removeFavourite } =
+// Убрать hcangeRole совсем, надо это меняит в апи
+
+export const { setUser, setUserDefault, addFavourite, removeFavourite, changeRole } =
 	userSlice.actions;
 
 export default userSlice.reducer;

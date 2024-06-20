@@ -17,9 +17,9 @@ const goodsSlice = createSlice({
 		setGoods(state, { payload }) {
 			state.goods = [...payload];
 		},
-    addOneGood(state, { payload }) {
-      state.goods = [payload, ...state.goods];
-    },
+		addOneGood(state, { payload }) {
+		state.goods = [payload, ...state.goods];
+		},
 		filterGoods(state, { payload }) {
 			state.goods = state.goods.filter((good) => good._id !== payload.good._id);
 		},

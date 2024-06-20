@@ -16,6 +16,8 @@ const Main: FC = () => {
 	const [currentGoods, setCurrentGoods] = useState<IGood[]>([]);
 	const [currentPage, setCurrentPage] = useState<number>(1);
 	const [goodsPerPage, setGoodsPerPage] = useState<number>(9);
+	const [pagesMoreThanOne, setPagesMoreThanOne] = useState<boolean>(false);
+	const [amountOfPages, setAmountOfPages] = useState<number>(1);
 
 	const lastIndex: number = currentPage * goodsPerPage;
 	const firstIndex: number = lastIndex - goodsPerPage;
@@ -49,6 +51,17 @@ const Main: FC = () => {
 	const handleFirstPage = (): void => {
 		setCurrentPage(1);
 	}
+
+	useEffect(() => {
+		const pages = Math.ceil(goods.length / goodsPerPage)
+		if (pages > 1) {
+			setPagesMoreThanOne(true);
+			setAmountOfPages(pages);
+		} else {
+			setPagesMoreThanOne(false);
+			setAmountOfPages(1);
+		}
+	}, [goods]);
 
 	// CHANGE AMOUNT OF CARDS PER PAGE
 	//////////////////////////////////////////////////////////////////////////////
@@ -105,6 +118,11 @@ const Main: FC = () => {
 				<li className='pagination-item' onClick={handleFirstPage} >First</li>
 				<li className='pagination-item' onClick={handlePrev} >{'<'}</li>
 				<li className='pagination-item'>{currentPage}</li>
+				{pagesMoreThanOne && <li className='pagination-item' style={{
+					backgroundColor: 'transparent',
+				}} 
+				>of</li>}
+				{pagesMoreThanOne && <li className='pagination-item'>{amountOfPages}</li>}
 				<li className='pagination-item' onClick={handleNext} >{'>'}</li>
 				<li className='pagination-item' onClick={handleLastPage} >Last</li>
 			</ul>

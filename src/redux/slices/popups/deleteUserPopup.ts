@@ -12,7 +12,9 @@ const deleteUserPopupSlice = createSlice({
    name: 'deleteUserPopup',
    initialState,
    reducers: {
-      setOpen(state)
+      setOpen(state, {payload}) {
+         
+      }
    }
 })
 
