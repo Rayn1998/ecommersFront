@@ -74,7 +74,9 @@ const GoodItem: FC = ({ ...props }: IGood) => {
 
 	const handleClick = (e) => {
 		e.stopPropagation();
-		dispatch(setCurrentGood(props));
+		// dispatch(setCurrentGood(props));
+		const goodJson = JSON.stringify(props);
+		localStorage.setItem('currentGood', goodJson);
 		navigate(`/item/:${id}`);
 	}
 

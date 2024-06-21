@@ -101,10 +101,6 @@ const Main: FC = () => {
 	}, []);
 	//////////////////////////////////////////////////////////////////////////////
 
-	// useEffect(() => {
-	// 	console.log(currentPage);
-	// }, [currentPage]);
-
 	return (
 		<div className='main'>
 			<Layout>

@@ -1,14 +1,11 @@
-import { useCallback, FC } from 'react';
+import { FC } from 'react';
 import { Route, Routes, useNavigate } from 'react-router-dom';
 
-import particlesConfig from '../../particlesjs-config.json';
-import Particles from 'react-tsparticles';
-import { loadFull } from 'tsparticles';
 //////////////////////////
 
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { api } from '../../utils/Api';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { setGoods } from '../../redux/slices/goodsSlice';
 import { setUser } from '../../redux/slices/userSlice';
 import { setUsers } from '../../redux/slices/usersSlice';
@@ -22,10 +19,10 @@ import Admin from '../Admin/Admin';
 import Favourites from '../Favourites/Favourites';
 import Payment from '../Payment/Payment';
 import GoodPage from '../GoodPage/GoodPage';
+import { RootState } from 'redux/store';
 
 const App: FC = () => {
-	const [onParticles, setOnParticles] = useState<boolean>(false);
-	const [onButtonsHover, setOnButtonsHover] = useState<boolean>(false);
+	const users = useSelector((state: RootState) => state.users.users)
 
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
@@ -64,36 +61,17 @@ const App: FC = () => {
 			cart = JSON.parse(localStorage.getItem('cart'));
 			cart && dispatch(setCart(cart));
 		}
-	}, [localStorage.getItem('token')]);
-
-	// PARTICLES ///////////////////////////
-	const handleParticles = useCallback(() => {
-		setOnParticles(!onParticles);
-	}, [onParticles]);
-
-	const handleButtonsHover = useCallback(() => {
-		!onButtonsHover 
-			? setOnButtonsHover(true)
-			: setTimeout(() => setOnButtonsHover(false), 1000);
-	}, [onButtonsHover]);
-
-	const particlesInit = useCallback(async (engine) => {
-		await loadFull(engine);
-	}, []);
-
-	const particlesLoaded = useCallback(async (container) => {
-		// await console.log(container);
-	}, []);
+	}, [localStorage.getItem('token'), users]);
 
 	return (
 		<>
 			<div
 				className='app'
 				style={{
-					backgroundColor: !onParticles && '#10041e',
+					backgroundColor: '#10041e',
 				}}
 			>
-				<div 
+				{/* <div 
 					className='buttons__arrow'
 					style={{
 						transform: onButtonsHover ? 'translateX(-10rem)' : 'translateX(0)',
@@ -116,7 +94,7 @@ const App: FC = () => {
 							transform: onButtonsHover ? 'translateX(0)' : 'translateX(-10rem)'
 						}}
 					></button>
-				</div>
+				</div> */}
 
 				<Routes>
 					<Route path='/' element={<Main />} />
@@ -129,14 +107,6 @@ const App: FC = () => {
 					<Route path='/item/:id' element={<GoodPage />} />
 				</Routes>
 			</div>
-			{/* {onParticles && (
-				<Particles
-					id='particles'
-					init={particlesInit}
-					loaded={particlesLoaded}
-					options={particlesConfig}
-				/>
-			)} */}
 		</>
 	);
 };

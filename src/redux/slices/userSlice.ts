@@ -42,15 +42,10 @@ const userSlice = createSlice({
 				(fav: Good) => fav._id !== payload._id
 			);
 		},
-		changeRole(state, { payload }: PayloadAction<string>) {
-			state.data.role = payload;
-		}
 	},
 });
 
-// Убрать hcangeRole совсем, надо это меняит в апи
-
-export const { setUser, setUserDefault, addFavourite, removeFavourite, changeRole } =
+export const { setUser, setUserDefault, addFavourite, removeFavourite } =
 	userSlice.actions;
 
 export default userSlice.reducer;

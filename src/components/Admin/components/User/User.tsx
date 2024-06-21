@@ -1,24 +1,39 @@
-import { FC, useCallback } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { FC, useCallback, useEffect, useState } from 'react';
+import { updateUsers } from 'redux/slices/usersSlice';
 
-import { changeRole } from '../../../../redux/slices/userSlice';
+import { api } from 'utils/Api';
 
 import IUser from 'types/User';
-import { RootState } from 'redux/store';
 
 const User: FC<IUser> = (props) => {
-  const user = useSelector((state: RootState) => state.user.data);
-  const dispatch = useDispatch();
+  const [role, setRole] = useState<string>('')
   const handleSelect = useCallback((e) => {
-    dispatch(changeRole(e.target.value))
+    const data = {
+      name: props.name, 
+      email: props.email,
+      role: e.target.value,
+    }
+    api.updateUser(data, props._id)
+      .then((res) => {
+        if(res) {
+          setRole(res.data.role)
+          updateUsers(res.data)
+        } else {
+          throw new Error("'didn't work :((")
+        }
+      }).catch(err => console.log(err))
   }, []);
+
+  useEffect(() => {
+    setRole(props.role)
+  }, [])
   return (
     <div className="user">
       <div className='user-wrapper'>
         <p className="user-name">Name: {props.name}</p>
         <div className="options-wrapper">
           <p>Role:</p>
-          <select className='options' value={user.role} onChange={handleSelect}>
+          <select className='options' value={role} onChange={handleSelect}>
             <option value='customer'>Customer</option>
             <option value='admin'>Admin</option>
           </select>

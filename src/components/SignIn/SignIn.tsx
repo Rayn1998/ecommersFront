@@ -11,7 +11,7 @@ import IFormValues from 'types/SignUpForm';
 
 const SignIn: FC = () => {
 	const [errStateMsg, setErrStateMsg] = useState<string>('Error');
-	const [visibState, setVisibState] = useState<boolean>(true);
+	const [visibState, setVisibState] = useState<boolean>(false);
 	const [blicker, setBlicker] = useState<boolean>(false);
 	const dispatch = useDispatch();
 	const {
